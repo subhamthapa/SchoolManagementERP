@@ -1,0 +1,46 @@
+<div class="text-center" style="height: calc(100vh/2); padding-top:calc(25vh)" *ngIf="loading">
+    <div class="spinner-border spinner-border-lg" role="status" style="width: 7rem; height: 7rem;">
+        <span class="visually-hidden">Loading...</span>
+    </div>   
+    <br><br> 
+    Loading...
+    <div class="spinner-grow spinner-grow-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="login" *ngIf="!loading" style="padding-left: 30%;margin-top: 8%;">
+    <!-- <div class="d-flex align-items-center justify-content-center" style="height: 100vh;" id="loginWrapper"> -->
+        <mat-card style="width:60%; height:60%; padding-bottom: 0px;" class="shadow p-0 mb-5 bg-white rounded">
+            <!-- <img mat-card-image src="{{thumbnail}}" style="object-fit: cover;" id="imageTile"/> -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <img mat-card-image src="{{thumbnail}}" class="img-responsive" style="object-fit: cover;margin-bottom: 0px;" id="imageTile"/>
+                </div>  
+                <div class="col-sm-6">
+                    <div class="text-center">
+                        <div style="padding-top: 100px;margin-bottom: 100px;">
+                            <h3>Login</h3>
+                        </div>
+                        <form>
+                            <mat-form-field appearance="outline" style="width: 250px">
+                                <mat-label>Username</mat-label>
+                                <input matInput placeholder="Placeholder" placeholder="Username" [formControl]="userNameControl" [(ngModel)]="username" [required]="true"/>
+                                <mat-error *ngIf="userNameControl.errors?.['required']">Username cannot be blank</mat-error>
+                              </mat-form-field><br>
+                              <mat-form-field appearance="outline" style="width: 250px">
+                                <mat-label>Password</mat-label>
+                                <input matInput placeholder="Placeholder" placeholder="Password" type="password"  [formControl]="passwordControl" [(ngModel)]="password" [required]="true"/>
+                                <mat-error *ngIf="passwordControl.errors?.['required']">Password cannot be blank</mat-error>
+                                <mat-hint style="color:purple" *ngIf="failedLogin">Username or password incorrect</mat-hint>
+                              </mat-form-field><br>
+                              <br>
+                              <button mat-raised-button color="primary" style="width: 250px" (click)="logIn()">Login</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>    
+        </mat-card>
+    <!-- </div> -->
+</div>

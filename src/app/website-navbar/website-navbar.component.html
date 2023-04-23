@@ -1,0 +1,30 @@
+<nav [className]="'navbar navbar-expand-sm justify-content-center d-none d-sm-block ' + navbarBg + ' ' + navbarTheme">
+    <div class="container-fluid">
+      <a class="navbar-brand">{{websiteName}}</a>
+      <ul class="navbar-nav" style="padding-right: 50px;">
+        <li class="nav-item" *ngFor="let navLink of navLinks">
+          <a class="nav-link" routerLink="{{navLink['url_routing']}}" [routerLinkActive]="['active']">{{navLink["app_name"]}}</a>
+        </li>
+      </ul>
+      
+    </div>
+</nav>
+<div class="d-lg-none d-xl-none d-md-none ">
+  <div class="navigation-bar">
+    <nav [className]="'navbar fixed-top ' +  navbarTheme + ' ' + navbarBg">
+      <button class="navbar-toggler" style="margin-left:10px" (click)="showSideNav=!showSideNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand">{{websiteName}}</a>
+    </nav>
+  </div>
+  <div [@toggle]="showSideNav ? 'open': 'close'" [className]="'side-nav ' + navbarBg " style="padding-top: 50px; z-index: 1000; opacity: 0.9;">
+    <ul class="side-nav-ul">
+      <li class="side-nav-li" *ngFor="let navLink of navLinks">
+        <a class="" routerLink="{{navLink['url_routing']}}" routerLinkActive="active" (click)="showSideNav=false"
+        [style]="navbarTheme == 'navbar-light' ? {'color': 'black'}: {'color': 'white'}">{{navLink["app_name"]}}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+

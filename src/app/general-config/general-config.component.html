@@ -1,0 +1,169 @@
+<div class="container">
+    <mat-card class="card-panel shadow p-3 mb-5 bg-white rounded">
+        <mat-card-header>
+            <mat-icon style="margin-right: 20px">settings</mat-icon>
+            <h6>General Configuration</h6>
+        </mat-card-header>
+        <mat-card-content>
+            <br>
+            Attributes
+            <hr>
+            <div class="row" id="general-attributes">
+                <div class="col-sm-4">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Website Name</mat-label>
+                        <input matInput type="text" [(ngModel)]="deferredData.website_name" [disabled]="style['disabledEditWebsiteName']" [required]="true">
+                        <button *ngIf="style['disabledEditWebsiteName']" matSuffix mat-icon-button aria-label="Clear" (click)="style['disabledEditWebsiteName']=false">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button *ngIf="!style['disabledEditWebsiteName']" matSuffix mat-icon-button aria-label="Cancel" (click)="style['disabledEditWebsiteName']=true;cancelEdit('website_name')">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Website Theme</mat-label>
+                        <mat-select [(ngModel)]="deferredData.website_theme" [disabled]="style['disabledWebsiteTheme']">
+                            <mat-option *ngFor="let theme of websiteTheme" [value]="theme.value">
+                              {{theme.viewValue}}
+                            </mat-option>
+                            </mat-select>
+                        <button *ngIf="style['disabledWebsiteTheme']" matSuffix mat-icon-button aria-label="Clear" (click)="style['disabledWebsiteTheme']=false">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button *ngIf="!style['disabledWebsiteTheme']" matSuffix mat-icon-button aria-label="Cancel" (click)="style['disabledWebsiteTheme']=true;cancelEdit('website_theme')">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-4">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Navbar Theme</mat-label>
+                        <mat-select [(ngModel)]="deferredData.navbar_theme" [disabled]="style['disabledNavbarTheme']">
+                            <mat-option *ngFor="let theme of navbarTheme" [value]="theme.value">
+                              {{theme.viewValue}}
+                            </mat-option>
+                            </mat-select>
+                        <button *ngIf="style['disabledNavbarTheme']" matSuffix mat-icon-button aria-label="Clear" (click)="style['disabledNavbarTheme']=false">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button *ngIf="!style['disabledNavbarTheme']" matSuffix mat-icon-button aria-label="Cancel" (click)="style['disabledNavbarTheme']=true;cancelEdit('navbar_theme')">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+            <br>
+            Social Media
+            <hr style="margin-top: 5px;">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div>
+                        <div *ngFor="let socialMedia of deferredSocialMediaColumns['one']; let i =index;" class="social-media-control">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>{{socialMedia.name}}</mat-label>
+                                <input matInput type="text" [(ngModel)]="socialMedia.url" [disabled]="socialMedia['disabled']" [required]="true">
+                                <button *ngIf="socialMedia['disabled']" matSuffix mat-icon-button aria-label="Clear" (click)="socialMedia['disabled']=false">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button *ngIf="!socialMedia['disabled']" matSuffix mat-icon-button aria-label="Cancel" (click)="socialMedia['disabled']=true;cancelSocialEdit('one',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <div class="clearfix">
+                                <span class="float-end">
+                                    <button mat-mini-fab color="primary" style="margin-top: 10px;" style="float:right;"
+                                    #tooltip="matTooltip" matTooltip="Delete" (click)="deleteSocial('one',i)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div>
+                        <div *ngFor="let socialMedia of deferredSocialMediaColumns['two']; let i =index;" class="social-media-control">
+                            <mat-form-field style="width: 100%;">
+                                <mat-label>{{socialMedia.name}}</mat-label>
+                                <input matInput type="text" [(ngModel)]="socialMedia.url" [disabled]="socialMedia['disabled']" [required]="true">
+                                <button *ngIf="socialMedia['disabled']" matSuffix mat-icon-button aria-label="Clear" (click)="socialMedia['disabled']=false">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button *ngIf="!socialMedia['disabled']" matSuffix mat-icon-button aria-label="Cancel" (click)="socialMedia['disabled']=true;cancelSocialEdit('two',i)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </mat-form-field>
+                            <div class="clearfix">
+                                <span class="float-end">
+                                    <button mat-mini-fab color="primary" style="margin-top: 10px;" style="float:right;"
+                                    #tooltip="matTooltip" matTooltip="Delete" (click)="deleteSocial('two',i)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add-social-media" *ngIf="flags['addSocialMedia']">
+                <br>
+                Add a social media page
+                <div class="row">
+                    <div class="col-sm-6">
+                        <mat-form-field style="margin-top: 20px;width: 100%;">
+                            <mat-label>Select Social Media</mat-label>
+                            <mat-select [(ngModel)]="selectedSocialMedia">
+                                <mat-option *ngFor="let socialMedia of socialMedias" [value]="socialMedia.value">
+                                  {{socialMedia.viewValue}}
+                                </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-6">
+                        <mat-form-field style="margin-top: 20px;width: 100%;">
+                            <mat-label>Url</mat-label>
+                            <input matInput type="text" [(ngModel)]="newSocialMediaUrl" [required]="true" placeholder="Enter url to the social media page/profile">
+                            <button *ngIf="style['disabledEditWebsiteName']" matSuffix mat-icon-button aria-label="Clear" (click)="style['disabledEditWebsiteName']=false">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button *ngIf="!style['disabledEditWebsiteName']" matSuffix mat-icon-button aria-label="Cancel" (click)="style['disabledEditWebsiteName']=true;cancelEdit('website_name')">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <button mat-fab color="primary" style="margin-top: 10px;" *ngIf="!flags['addSocialMedia']"
+            #tooltip="matTooltip" matTooltip="Add social media pages and links" (click)="flags['addSocialMedia']=true">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button mat-fab *ngIf="flags['addSocialMedia']" color="primary" style="margin-top: 10px;" 
+            #tooltip="matTooltip" matTooltip="Add" (click)="flags['addSocialMedia']=false;addSocial()">
+                <mat-icon>check</mat-icon>
+            </button>
+            &nbsp;
+            <button mat-fab *ngIf="flags['addSocialMedia']" color="primary" style="margin-top: 10px;" 
+            #tooltip="matTooltip" matTooltip="Cancel" (click)="flags['addSocialMedia']=false;cancelAddSocial()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <hr>
+            <br>
+            After saving your changes, they will not reflect
+            automatically on webapps and your website. The user must reload the webpage for them to see the changes
+            <br><br>
+            <button mat-raised-button color="primary" (click)="saveChanges()">
+                <mat-icon>
+                    check
+                </mat-icon>&nbsp;Save
+            </button>
+            <button mat-raised-button color="warn" style="margin-left: 20px;">
+                <mat-icon>
+                    delete
+                </mat-icon>&nbsp;Cancel
+            </button>
+           
+        </mat-card-content>
+    </mat-card>
+</div>

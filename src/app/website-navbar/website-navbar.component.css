@@ -1,0 +1,30 @@
+.side-nav
+{
+    height: 100%;
+    width: calc(100vw/2);
+    position: fixed;
+	left: -100px;
+}
+
+.side-nav-ul
+{
+	list-style-type:none;
+	padding-left: 20px;
+}
+
+.side-nav-li
+{
+	padding-top: 20px;
+	font-size: 15px;
+	color:white;
+	padding-bottom: 20px;
+}
+.side-nav-li:hover
+{
+	font-size: 20px;
+	opacity: 0.5;
+}
+a
+{
+    text-decoration: none;
+}
