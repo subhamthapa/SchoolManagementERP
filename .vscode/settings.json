@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 1000,
+            "driver": "SQLite",
+            "database": "/Users/subham.thapa/PycharmProjects/SchoolManagementERP/school-management-erp-server/SchoolManagementERP/db.sqlite3",
+            "name": "TEST_ERP_DB"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
