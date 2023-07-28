@@ -35,6 +35,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatTreeModule } from '@angular/material/tree';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 import { AuthService, AuthInterceptor, AuthGuard } from './auth-service';
 import { DashboardSideNavComponent } from './dashboard-side-nav/dashboard-side-nav.component';
@@ -129,7 +130,8 @@ function init() {
     AddModel,
     MatRippleModule,
     MatTableModule,
-    MatTreeModule
+    MatTreeModule,
+    CdkMenuModule
   ],
   providers: [
     ConfigService,
