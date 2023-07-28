@@ -1,0 +1,69 @@
+.top-nav {
+  background-color: indigo;
+  position: fixed;
+  min-height: 50px;
+  width: 100%;
+  margin: 0 auto;
+
+  padding: 15px;
+  z-index: 1000;
+  padding-left: 150px;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.nav-button {
+  margin-left: 10px;
+}
+.body {
+  padding-top: 70px;
+}
+
+.widget-tree {
+  background-color: lightyellow;
+  color: green;
+  font-family: "Roboto Mono", monospace;
+}
+.attrbutes {
+  min-height: 750px;
+  background-color: lightyellow;
+  font-family: "Roboto Mono", monospace;
+  padding: 10px;
+}
+.side-navbar-button {
+  color: indigo !important;
+  width: 100%;
+  text-align: left;
+  font-family: "Roboto Mono", monospace;
+}
+.editor-component {
+  -webkit-transition: background-color 200ms linear;
+  -moz-transition: background-color 200ms linear;
+  -o-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+
+.editor-component:hover {
+  background-color: #eedbd5;
+}
+
+.attribute-panel {
+  font-size: 10px;
+}
+.attributeInputs {
+  width: 100%;
+}
+.widgets-div {
+  position: fixed;
+}
+.body {
+  min-height: 100vh;
+}
+.attrbutes-div {
+  width: 190px;
+  position: fixed;
+  min-height: 100vh;
+  background-color: lightyellow;
+  padding-top: 70px;
+}

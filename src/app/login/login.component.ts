@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login-services';
 import { FormControl, FormBuilder, FormGroup } from '@angular/forms';
-import { AuthService } from '../auth-service';
+import { isLoggedIn } from '../auth-service';
 import * as $ from 'jquery';
 
 @Component({
@@ -17,9 +17,13 @@ export class LoginComponent implements OnInit {
   username: string = ""
   password: string = ""
   failedLogin: boolean = false
-  constructor(private loginService: LoginService, private authServuce: AuthService) { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
+    if(!isLoggedIn())
+    {
+
+    }
     this.loading = true
     this.loginService.getLoginThumbnail(this)
   }
@@ -41,7 +45,7 @@ export class LoginComponent implements OnInit {
     {
       this.loginService.logIn(this.username, this.password, this)
     }
-    
+
   }
 
 }

@@ -1,0 +1,16 @@
+.area
+{
+  padding-top: 100px;
+}
+.db-list
+{
+  margin: 2px;
+}
+.db-list:hover
+{
+  padding: 15px;
+}
+.workspace
+{
+  min-height: 50vh;
+}

@@ -17,4 +17,6 @@ export interface SetGeneralConfig
     platform: string
     attributes: GeneralConfigAttribute
     social_media: SocialMediaAttributes[]
+    deleted_social_media: number []
+    location: any
 }

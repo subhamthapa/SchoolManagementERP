@@ -1,0 +1,41 @@
+.edit-panel
+{
+  min-height: calc(100vh/1.09);
+}
+.image_button
+{
+  position: absolute;
+  top: calc(100% - 120px);
+  opacity: 0.9;
+  width: 70px;
+  height: 70px;
+}
+.add_rem
+{
+  left: 22%;
+}
+#prev_img
+{
+  left: 2%;
+}
+#next_img
+{
+  left: 12%;
+}
+#delete_image
+{
+  left: 32%;
+}
+
+.imageGridElement
+{
+  padding-top: 10px;
+}
+.social-media-control
+{
+  padding-top:20px;
+}
+.demo_image
+{
+  aspect-ratio: 2.5;
+}

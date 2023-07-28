@@ -1,0 +1,50 @@
+<mat-drawer-container class="dashboardContainer" autosize>
+  <mat-drawer mode="side" [opened]="true" class="sideNav">
+    <div>
+      <div
+        class="text-white"
+        style="padding-top: 20px; padding-left: 10px; padding-right: 10px"
+      >
+        <div class="text-center">
+          <mat-icon
+            style="vertical-align: middle; font-size: 30px"
+            (click)="isExpanded = !isExpanded"
+          >
+            <span class="material-symbols-outlined" style="size: 48">
+              dashboard
+            </span>
+          </mat-icon>
+          <span
+            *ngIf="isExpanded"
+            style="vertical-align: bottom; padding-left: 15px"
+            ><small>Dashboard</small></span
+          >
+        </div>
+        <hr />
+        <div class="tabs">
+          <mat-nav-list style="position: relative">
+            <mat-list-item class="listed" routerLink="data-model-manager">
+              <mat-icon mat-list-icon style="color: white; font-size: 30px"
+                >dynamic_feed</mat-icon
+              >
+              <span mat-line *ngIf="isExpanded" style="color: white">
+                <small>Models</small>
+              </span>
+            </mat-list-item>
+            <mat-list-item class="listed" routerLink="view-manager">
+              <mat-icon mat-list-icon style="color: white; font-size: 30px"
+                >app_registration</mat-icon
+              >
+              <span mat-line *ngIf="isExpanded" style="color: white">
+                <small>Views</small>
+              </span>
+            </mat-list-item>
+          </mat-nav-list>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>

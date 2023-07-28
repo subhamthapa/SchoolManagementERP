@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div *ngFor="let page of grid.defferedColumns[0]" class="pageButton">
+      <a href="" (click)="false" routerLink="{{page.link}}">
+        <mat-card  rows="8" class="pages">
+          <div class="text-center">
+            <mat-icon>{{ page.icon }}</mat-icon
+            ><br />
+            <small>{{ page.page_name }}</small>
+          </div>
+        </mat-card>
+      </a>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div *ngFor="let page of grid.defferedColumns[1]" class="pageButton">
+      <a href="" (click)="false" >
+        <mat-card  rows="8" class="pages">
+          <div class="text-center">
+            <mat-icon>{{ page.icon }}</mat-icon
+            ><br />
+            <small>{{ page.page_name }}</small>
+          </div>
+        </mat-card>
+      </a>
+    </div>
+  </div>
+</div>
+<button
+  mat-fab
+  color="primary"
+  style="margin-top: 10px"
+  #tooltip="matTooltip"
+  matTooltip="Add website page"
+>
+  <mat-icon>add</mat-icon>
+</button>

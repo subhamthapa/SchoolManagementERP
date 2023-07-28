@@ -1,0 +1,15 @@
+.attribute-panel
+{
+  font-size: 10px;
+}
+.attributeInputs
+{
+  width: 100%;
+}
+.attrbutes
+{
+  min-height: 100vh;
+  background-color: lightyellow;
+  font-family: 'Roboto Mono', monospace;
+  padding: 10px;
+}

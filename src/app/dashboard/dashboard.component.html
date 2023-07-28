@@ -1,72 +1,47 @@
-  <mat-drawer-container class="dashboardContainer">
+  <mat-drawer-container class="dashboardContainer" autosize >
     <mat-drawer mode="side" [opened]="true" class="sideNav">
       <div>
-        <div class="text-white" style="padding-top: 20px; padding-left: 10px; padding-right: 10px;">
+        <div class="text-white" style="padding-top: 20px; padding-left: 10px; padding-right: 10px; ">
           <div class="text-center">
-            <h4>Dashboard</h4>
+            <mat-icon style="vertical-align: middle; font-size: 30px" (click)="isExpanded=!isExpanded">
+              <span class="material-symbols-outlined" style="size: 48">
+                dashboard
+              </span>
+            </mat-icon>
+            <span *ngIf="isExpanded" style="vertical-align: bottom; padding-left: 15px;">Dashboard</span>
           </div>
           <hr>
-          <div style="padding: 20px">
-            <span><img src="{{profilePic}}" class="rounded-circle" width="50" style="margin-right: 20px;">{{username}}</span>
+          <div style = "" class="text-center">
+            <img src="{{profilePic}}" class="rounded-circle" width="50" style=""><br>
+            <small style="margin-top: 3px;">@{{username}}</small>
           </div>
           <hr>
           <div class="tabs">
-            <!-- <button mat-flat-button color="basic" style="width: 100%;text-align: left; height: 60px; opacity: 0.9;"><mat-icon>dynamic_feed</mat-icon><span style="padding-left: 10px">
-              Overview
-            </span></button>
-            <button mat-button color="basic" style="width: 100%;text-align: left; height: 60px; opacity: 0.9;"><mat-icon><span class="material-symbols-outlined">
-              workspaces
-              </span></mat-icon><span style="padding-left: 10px">
-              Tasks
-            </span></button> -->
-            <ul class="sid-nv-ul">
-              <li class="side-nav-li">
-                <button class="btn btn-default text-white nav-button" routerLinkActive="nav-active">
-                  <mat-icon style="vertical-align: middle;">
-                    <span class="material-symbols-outlined">
-                      dynamic_feed
-                    </span>
-                  </mat-icon>
-                  <span class="button-text">Overview</span>
-                </button>
-                <button class="btn btn-default text-white nav-button">
-                  <mat-icon style="vertical-align: middle;">
-                    <span class="material-symbols-outlined">
-                    workspaces
-                    </span>
-                  </mat-icon>
-                  <span class="button-text">Tasks</span>
-                </button>
-                <button class="btn btn-default text-white nav-button">
-                  <mat-icon style="vertical-align: middle;">
-                    <span class="material-symbols-outlined">
-                    group
-                    </span>
-                  </mat-icon>
-                  <span class="button-text">Social</span>
-                </button>
-                <button class="btn btn-default text-white nav-button" routerLinkActive="nav-active"
-                  routerLink="website-config">
-                  <mat-icon style="vertical-align: middle;">
-                    <span class="material-symbols-outlined">
-                    settings
-                    </span>
-                  </mat-icon>
-                  <span class="button-text">Website Config</span>
-                </button> 
-                <button class="btn btn-default text-white nav-button">
-                  <mat-icon style="vertical-align: middle;">
-                    <span class="material-symbols-outlined">
-                    message
-                    </span>
-                  </mat-icon>
-                  <span class="button-text">Messages</span>
-                </button> 
-              </li>
-            </ul>
+            <mat-nav-list style="position: relative">
+              <mat-list-item class="listed">
+                <mat-icon mat-list-icon style="color: white; font-size: 30px;">dynamic_feed</mat-icon>
+                <h4 mat-line *ngIf="isExpanded" style="color: white;"><small>Overview</small></h4>
+              </mat-list-item>
+              <mat-list-item  class="listed">
+                <mat-icon mat-list-icon  style="color: lightgray;">workspaces</mat-icon>
+                <h4 mat-line *ngIf="isExpanded" style="color: white;"><small>Tasks</small></h4>
+              </mat-list-item>
+              <mat-list-item  class="listed">
+                <mat-icon mat-list-icon  style="color: lightgray;">group</mat-icon>
+                <h4 mat-line *ngIf="isExpanded"style="color: white;"><small>Social</small></h4>
+              </mat-list-item>
+              <mat-list-item  class="listed" routerLink="website-config">
+                <mat-icon mat-list-icon  style="color: lightgray;">settings</mat-icon>
+                <h4 mat-line *ngIf="isExpanded"style="color: white;"><small>Website Config</small></h4>
+              </mat-list-item>
+              <mat-list-item  class="listed">
+                <mat-icon mat-list-icon  style="color: lightgray;">message</mat-icon>
+                <h4 mat-line *ngIf="isExpanded"style="color: white;"><small>Messages</small></h4>
+              </mat-list-item>
+            </mat-nav-list>
+          </div>
           </div>
         </div>
-      </div>
     </mat-drawer>
     <mat-drawer-content>
       <router-outlet></router-outlet>

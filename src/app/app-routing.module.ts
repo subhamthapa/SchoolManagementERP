@@ -7,8 +7,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { WebsiteHomeComponent } from './website-home/website-home.component';
 import { AuthGuard } from './auth-service';
 import { WebsiteConfigComponent } from './website-config/website-config.component';
-import { EditHomeComponent } from './edit-home/edit-home.component';
+import { HomePageConfigComponent } from './home-page-config/home-page-config.component'
 import { GeneralConfigComponent } from './general-config/general-config.component';
+import { DesignScreenComponent } from './design-screen/design-screen.component';
+import { DataModelManagerComponent } from './data-model-manager/data-model-manager.component';
+import { DesignScreenAppRoutes  } from './design-screen/routing'
 
 const routes: Routes = [
   {
@@ -44,12 +47,19 @@ const routes: Routes = [
             component: GeneralConfigComponent,
             canActivate: [AuthGuard]
           }
+          ,
+          {
+            path: 'home-page-config',
+            component: HomePageConfigComponent,
+            canActivate: [AuthGuard]
+          }
         ]
       }
     ],
     canActivate: [AuthGuard]
   }
 ];
+routes.push(DesignScreenAppRoutes.routes)
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

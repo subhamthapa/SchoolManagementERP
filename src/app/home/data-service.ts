@@ -13,12 +13,12 @@ export class HomeDataService
     constructor(private httpClient: HttpClient)
     {}
 
-    private getWebsiteHomeDataObserable()
+    public getWebsiteHomeDataObserable()
     {
-        return this.httpClient.get<GetWebsiteHomeData>(WebAppConstants.get_website_home_data, 
+        return this.httpClient.get<GetWebsiteHomeData>(WebAppConstants.get_website_home_data,
             { params: {platform: Utilities.getPlatform()}})
     }
-    
+
     public getWebsiteHomeData(view: HomeComponent)
     {
         this.getWebsiteHomeDataObserable().subscribe(success=>
@@ -32,7 +32,7 @@ export class HomeDataService
         error=>
         {
             alert(JSON.stringify(error))
-            
+
         })
     }
 }

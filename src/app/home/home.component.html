@@ -1,76 +1,131 @@
-<div class="text-center" style="height: calc(100vh/2); padding-top:calc(25vh)" *ngIf="loading">
-  <div class="spinner-border spinner-border-lg" role="status" style="width: 7rem; height: 7rem;">
-      <span class="visually-hidden">Loading...</span>
-  </div>   
-  <br><br> 
+<div
+  class="text-center"
+  style="height: calc(100vh / 2); padding-top: calc(25vh)"
+  *ngIf="loading"
+>
+  <div
+    class="spinner-border spinner-border-lg"
+    role="status"
+    style="width: 7rem; height: 7rem"
+  >
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <br /><br />
   Loading...
   <div class="spinner-grow spinner-grow-sm" role="status">
-      <span class="visually-hidden">Loading...</span>
+    <span class="visually-hidden">Loading...</span>
   </div>
 </div>
 <div>
-    <div id="website_carousel" class="carousel slide" data-bs-ride="carousel">
-
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#website_carousel" 
-            [attr.data-bs-slide-to]="i" [class]="( i == 0 ? 'active' : '' )" *ngFor="let image of carouselImages; let i=index"></button>
-        </div>
-        <div class="carousel-inner">
-          <div [class] = "'carousel-item ' + ( i == 0 ? 'active' : '' )" *ngFor="let image of carouselImages; let i=index" style="height: calc(70vh)">
-            <img src="{{apiHost + image.image}}" alt="" class="d-block w-100" style="height: calc(70vh);object-fit:cover">
-          </div>
-        </div>
-        <div *ngIf="carouselImages.length > 1">
-            <button class="carousel-control-prev" type="button" data-bs-target="#website_carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#website_carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
+  <div id="website_carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#website_carousel"
+        [attr.data-bs-slide-to]="i"
+        [class]="i == 0 ? 'active' : ''"
+        *ngFor="let image of carouselImages; let i = index"
+      ></button>
+    </div>
+    <div class="carousel-inner">
+      <div
+        [class]="'carousel-item ' + (i == 0 ? 'active' : '')"
+        *ngFor="let image of carouselImages; let i = index"
+        style="height: calc(70vh)"
+      >
+        <img
+          src="{{ apiHost + image.image }}"
+          alt=""
+          class="d-block w-100"
+          style="height: calc(70vh); object-fit: cover"
+        />
       </div>
+    </div>
+    <div *ngIf="carouselImages.length > 1">
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#website_carousel"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#website_carousel"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
 </div>
-<div class="container-fluid" style="margin-top: 30px;">
-  <div *ngFor="let note of imageNotes;let i=index" style="padding: 20px;">
-    <div class="row" *ngIf="i%2==0 else float_image_right">
+<div class="container-fluid" style="margin-top: 30px">
+  <div *ngFor="let note of imageNotes; let i = index" style="padding: 20px">
+    <div class="row" *ngIf="i % 2 == 0; else float_image_right">
       <div class="col-sm-2">
-        <img src="{{apiHost + note.thumbnail}}" class="" style="width: 100%;"/>
+        <img
+          src="{{ apiHost + note.thumbnail }}"
+          class=""
+          style="width: 100%"
+        />
       </div>
       <div class="col-sm-10">
-        <span style="font-size:20px" class="float-end">{{note.note}}</span>
+        <span style="font-size: 20px" class="float-end">{{ note.note }}</span>
       </div>
     </div>
     <ng-template #float_image_right>
-      <div class="row" *ngIf="i%2!=0">
+      <div class="row" *ngIf="i % 2 != 0">
         <div class="col-sm-10">
-          <span style="font-size:20px" class="float-end">{{note.note}}</span>
+          <span style="font-size: 20px" class="float-end">{{ note.note }}</span>
         </div>
         <div class="col-sm-2">
-          <img src="{{apiHost + note.thumbnail}}" class="" style="width: 100%;"/>
+          <img
+            src="{{ apiHost + note.thumbnail }}"
+            class=""
+            style="width: 100%"
+          />
         </div>
       </div>
-     </ng-template>
-    <hr>
+    </ng-template>
+    <hr />
   </div>
 </div>
 <div *ngIf="demoImages.length > 0" class="container-fluid">
-    <h1>Glimpses</h1>
-    <br>
-    <div class="row">
-      <div class="col-sm-4">
-        <div *ngFor="let image of demoImages;let i=index">
-          <img src="{{apiHost + image.thumbnail_mid}}" height="300" width="100%" *ngIf="i%3==0" class="rounded"/>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div *ngFor="let image of demoImages;let i=index">
-          <img src="{{apiHost + image.thumbnail_mid}}" height="300" width="100%" *ngIf="i%3==1" class="rounded"/>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div *ngFor="let image of demoImages;let i=index">
-          <img src="{{apiHost + image.thumbnail_mid}}" height="300" width="100%" *ngIf="i%3==2" class="rounded"/>
-        </div>
+  <h1>Glimpses</h1>
+  <br />
+  <div class="row">
+    <div class="col-sm-4">
+      <div *ngFor="let image of demoImages; let i = index">
+        <img
+          src="{{ apiHost + image.thumbnail_rect }}"
+          width="100%"
+          *ngIf="i % 3 == 0"
+          class="demo_image"
+        />
       </div>
     </div>
+    <div class="col-sm-4">
+      <div *ngFor="let image of demoImages; let i = index">
+        <img
+          src="{{ apiHost + image.thumbnail_rect }}"
+          class="demo_image demo_image"
+          width="100%"
+          *ngIf="i % 3 == 1"
+          class="demo_image"
+        />
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div *ngFor="let image of demoImages; let i = index">
+        <img
+          src="{{ apiHost + image.thumbnail_rect }}"
+          width="100%"
+          *ngIf="i % 3 == 2"
+          class="demo_image"
+        />
+      </div>
+    </div>
+  </div>
 </div>

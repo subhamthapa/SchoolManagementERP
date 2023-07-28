@@ -1,0 +1,99 @@
+<div class="attrbutes">
+  Attributes
+  <hr />
+  <div class="attribute-panel">
+    <div class="row">
+      <div class="col-sm-3">Element Name</div>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="attributeInputs"
+          [(ngModel)]="attributes.elementName"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">Id</div>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="attributeInputs"
+          [(ngModel)]="attributes.id"
+        />
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+      <div class="col-sm-3">
+        Value
+        <button
+          mat-mini-fab
+          color="primary"
+          #tooltip="matTooltip"
+          matTooltip="Views in project"
+          style="height: 30px; width: 30px; margin-top: 10px"
+        >
+          <mat-icon style="font-size: 17px; vertical-align: center"
+            >keyboard_double_arrow_up</mat-icon
+          >
+        </button>
+      </div>
+      <div class="col-sm-9">
+        <textarea
+          rows="5"
+          [(ngModel)]="attributes.value"
+          class="attributeInputs"
+          id="attributeValue"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">Font Size</div>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="attributeInputs"
+          [(ngModel)]="attributes.fontSize"
+          id="attributeFontSize"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">Color</div>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="attributeInputs"
+          [(ngModel)]="attributes.color"
+          id="attributeColor"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">Custom css</div>
+      <div class="col-sm-9">
+        <textarea
+          rows="5"
+          [(ngModel)]="attributes.customStyle"
+          class="attributeInputs"
+          id="attributeCss"
+        ></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3">Bootstrap color scheme</div>
+      <div class="col-sm-9">
+        <select
+          class="form-control"
+          style="font-size: 12px"
+          [(ngModel)]="attributes.bootstrapColorScheme"
+          id="attributeBootstrapColorScheme"
+        >
+          <option *ngFor="let col of bootstrapColorDetail" [value]="col.value">
+            {{ col.display }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <button style="top: 100px;"></button>
+  </div>
+</div>

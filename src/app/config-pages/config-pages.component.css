@@ -1,0 +1,13 @@
+.pages
+{
+background-color: lightgoldenrodyellow ;
+}
+.pageButton
+{
+  padding-top: 10px;
+}
+
+.pageButton > a
+{
+  text-decoration: none;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from './services';
-import { AuthService } from '../auth-service';
+import { isLoggedIn } from '../auth-service';
+import { CanActivate, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +13,12 @@ export class DashboardComponent implements OnInit {
   showFiller = false;
   username:string = ""
   profilePic: string =""
-  constructor(private service: Service, private authService:AuthService) { }
+  isExpanded = false
+  constructor(private service: Service, private router: Router) { }
 
   ngOnInit(): void {
     this.service.getDashboardConfig(this)
-    this.authService.checkAuthority('dashboard')
+    isLoggedIn() ? null : this.router.navigate(['login', {'redirect': encodeURI('dashboard')}])
   }
 
 }

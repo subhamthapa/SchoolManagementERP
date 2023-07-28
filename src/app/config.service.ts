@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http';
 import { WebAppConstants } from './website.constants';
 import { WebsiteConfig } from './config.data-modal';
 import { Utilities } from './Utilities';
@@ -14,9 +14,15 @@ export class ConfigService
 
     public getWebsiteConfigurationObserable()
     {
-        return this.httpClient.get<WebsiteConfig>(WebAppConstants.get_website_config, 
+        return this.httpClient.get<WebsiteConfig>(WebAppConstants.get_website_config,
                     { params: {platform: Utilities.getPlatform()}})
-        
+
+    }
+    public getWebsiteRefreshedObserable(last_refreshed: string)
+    {
+        return this.httpClient.get<WebsiteConfig>(WebAppConstants.getConfigChangeStatus,
+                    { params: {platform: Utilities.getPlatform(), last_refreshed: last_refreshed}})
+
     }
     public getWebsiteConfiguration(view: WebsiteNavbarComponent)
     {
@@ -26,6 +32,7 @@ export class ConfigService
             {
                 this.getWebsiteConfigurationObserable().subscribe(
                     (success: WebsiteConfig) => {
+                      console.log(success)
                         localStorage.setItem("website_configuration", JSON.stringify(success))
                         view.navLinks = success["navbar_list"]
                         view.websiteName = success["website_name"]
@@ -44,7 +51,14 @@ export class ConfigService
         }
         else
         {
+
             var config = JSON.parse(localStorage.getItem("website_configuration") || "{}")
+            this.getWebsiteRefreshedObserable(config["last_refreshed"]).subscribe(
+              success =>
+              {
+                console.log(success)
+              }
+            )
             view.websiteName = config["website_name"]
             view.navLinks = config["navbar_list"]
             view.navbarBg = config["website_theme"]
@@ -85,5 +99,5 @@ export class ConfigService
         }
         return null
     }
-    
+
 }

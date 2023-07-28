@@ -5,7 +5,13 @@ import { Utilities } from '../Utilities';
 import { SetGeneralConfig } from './models'
 import { GeneralConfigComponent } from "./general-config.component";
 import { config } from "rxjs";
+import { FooterData } from '../website-footer/data-model'
 
+interface ConfigReturn
+{
+  status:  boolean
+  social_media: FooterData
+}
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +24,6 @@ export class GeneralConfigService
     public setGeneralConfigObservable(data: SetGeneralConfig)
     {
         data.platform = Utilities.getPlatform()
-        console.log(data)
         return this.httpClient.post(WebAppConstants.set_general_config, data)
     }
 
@@ -30,6 +35,8 @@ export class GeneralConfigService
                 view.loading = false
                 view.disableAll()
                 view.showPopUp("Changes saved.")
+                view.deletedSocialMedia = []
+                view.grid.updateAndApplyIntoGrid((<FooterData>success)["social_media"], {"disabled": true})
             }
             ,
             error =>
