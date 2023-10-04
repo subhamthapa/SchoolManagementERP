@@ -1,0 +1,53 @@
+.center {
+  margin: auto;
+  width: 40%;
+  padding: 10px;
+}
+.baseDiv
+{
+  padding-top: 350px;
+}
+.login-form
+{
+  padding: 50px;
+}
+#loginCard
+{
+  margin-top: 80px;
+  background-image: linear-gradient(indigo, purple);
+}
+.login-form *
+{
+  color: white;
+  border-color: white;
+  background: transparent;
+}
+input *
+{
+  color: white;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px indigo inset !important;
+  -webkit-text-fill-color: white !important;
+}
+input:-internal-autofill-selected
+{
+  background-color: black !important;
+}
+
+@media all and (max-width: 767px) and (max-height: 1023px) {
+  .sm
+  {
+    min-height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    background-image: linear-gradient(indigo, purple);
+  }
+}
+.loginPanel
+{
+  padding-top: 45%;
+}

@@ -1,0 +1,52 @@
+.baseWebsiteNavbar {
+  width: 100%;
+  background-image: linear-gradient(indigo, purple);
+  position: fixed;
+  z-index: 1000;
+  padding: 20px;
+}
+.baseNavbarLinks > a {
+  float: right;
+  text-decoration: none;
+  color: white;
+  margin: 10px;
+}
+.header {
+  padding-top: 70px;
+  color: white;
+}
+.baseHederCenter
+{
+  width: 400px;
+}
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+.baseLi
+{
+  padding-left: 10px;
+}
+.accountActions > button
+{
+  color:black;
+  margin: 10px;
+}
+@media all and (min-width: 768px) and (max-width: 820px) and (min-height: 1024px) and (max-height: 1180px) and (orientation:portrait) {
+  .baseWebsiteNavbar
+  {
+    height: 400px !important;
+  }
+}
+.scrollerUl > li > a
+{
+  text-decoration: none;
+  color: white;
+}
+.scroller
+{
+  background-color: white;
+  height: calc(100vh);
+  z-index: 3000;
+}

@@ -3,40 +3,43 @@
       <div>
         <div class="text-white" style="padding-top: 20px; padding-left: 10px; padding-right: 10px; ">
           <div class="text-center">
-            <mat-icon style="vertical-align: middle; font-size: 30px" (click)="isExpanded=!isExpanded">
-              <span class="material-symbols-outlined" style="size: 48">
-                dashboard
-              </span>
-            </mat-icon>
-            <span *ngIf="isExpanded" style="vertical-align: bottom; padding-left: 15px;">Dashboard</span>
+            <button mat-button (click)="isExpanded=!isExpanded">
+              <mat-icon style="color:white">
+                <span class="">
+                  dashboard
+                </span>
+              </mat-icon>
+              <span *ngIf="isExpanded" style="vertical-align: middle; padding-left: 2px; font-size: 10px; color:white">Dashboard</span>
+              </button>
           </div>
           <hr>
-          <div style = "" class="text-center">
-            <img src="{{profilePic}}" class="rounded-circle" width="50" style=""><br>
+          <div style class="text-center">
+            <img src="{{profilePic}}" class="rounded-circle" width="50" *ngIf="profilePic">
+            <mat-icon *ngIf="!profilePic">person</mat-icon><br>
             <small style="margin-top: 3px;">@{{username}}</small>
           </div>
           <hr>
           <div class="tabs">
             <mat-nav-list style="position: relative">
               <mat-list-item class="listed">
-                <mat-icon mat-list-icon style="color: white; font-size: 30px;">dynamic_feed</mat-icon>
-                <h4 mat-line *ngIf="isExpanded" style="color: white;"><small>Overview</small></h4>
+                <mat-icon mat-list-icon class="side-nav-icon">dynamic_feed</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label" ><small>Overview</small></span>
               </mat-list-item>
               <mat-list-item  class="listed">
-                <mat-icon mat-list-icon  style="color: lightgray;">workspaces</mat-icon>
-                <h4 mat-line *ngIf="isExpanded" style="color: white;"><small>Tasks</small></h4>
+                <mat-icon mat-list-icon  class="side-nav-icon">workspaces</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"><small>Tasks</small></span>
               </mat-list-item>
               <mat-list-item  class="listed">
-                <mat-icon mat-list-icon  style="color: lightgray;">group</mat-icon>
-                <h4 mat-line *ngIf="isExpanded"style="color: white;"><small>Social</small></h4>
+                <mat-icon mat-list-icon  class="side-nav-icon">group</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"><small>Social</small></span>
               </mat-list-item>
               <mat-list-item  class="listed" routerLink="website-config">
-                <mat-icon mat-list-icon  style="color: lightgray;">settings</mat-icon>
-                <h4 mat-line *ngIf="isExpanded"style="color: white;"><small>Website Config</small></h4>
+                <mat-icon mat-list-icon class="side-nav-icon">settings</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"><small>Config</small></span>
               </mat-list-item>
               <mat-list-item  class="listed">
-                <mat-icon mat-list-icon  style="color: lightgray;">message</mat-icon>
-                <h4 mat-line *ngIf="isExpanded"style="color: white;"><small>Messages</small></h4>
+                <mat-icon mat-list-icon  class="side-nav-icon">message</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"><small>Messages</small></span>
               </mat-list-item>
             </mat-nav-list>
           </div>

@@ -1,0 +1,115 @@
+<div *ngIf="!smallScreen">
+  <mat-drawer-container class="dashboardContainer" autosize>
+    <mat-drawer mode="side" [opened]="true" class="sideNav">
+      <div class="d-none d-md-block">
+        <div
+          class="text-white"
+          style="padding-top: 20px; padding-left: 10px; padding-right: 10px"
+        >
+          <div class="text-center">
+            <button mat-button (click)="isExpanded = !isExpanded">
+              <mat-icon style="color: white">
+                <span class=""> dashboard </span>
+              </mat-icon>
+              <span
+                *ngIf="isExpanded"
+                style="
+                  vertical-align: middle;
+                  padding-left: 2px;
+                  font-size: 10px;
+                  color: white;
+                "
+                >Dashboard</span
+              >
+            </button>
+          </div>
+          <hr />
+          <div style="" class="text-center">
+            <mat-icon>person</mat-icon>
+            <img src="" class="rounded-circle" width="50" style="" /><br />
+            <small style="margin-top: 3px"></small>
+          </div>
+          <hr />
+          <div class="tabs">
+            <mat-nav-list style="position: relative">
+              <mat-list-item class="listed" routerLink="/dashboard">
+                <mat-icon mat-list-icon class="side-nav-icon"
+                  >dynamic_feed</mat-icon
+                >
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"
+                  ><small>Overview</small></span
+                >
+              </mat-list-item>
+              <mat-list-item class="listed">
+                <mat-icon mat-list-icon class="side-nav-icon"
+                  >workspaces</mat-icon
+                >
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"
+                  ><small>Tasks</small></span
+                >
+              </mat-list-item>
+              <mat-list-item class="listed" routerLink="social">
+                <mat-icon mat-list-icon class="side-nav-icon">group</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"
+                  ><small>Social</small></span
+                >
+              </mat-list-item>
+              <mat-list-item class="listed">
+                <mat-icon
+                  mat-list-icon
+                  class="side-nav-icon"
+                  routerLink="account"
+                  >settings</mat-icon
+                >
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"
+                  ><small>Config</small></span
+                >
+              </mat-list-item>
+              <mat-list-item class="listed">
+                <mat-icon mat-list-icon class="side-nav-icon">message</mat-icon>
+                <span mat-line *ngIf="isExpanded" class="side-nav-label"
+                  ><small>Messages</small></span
+                >
+              </mat-list-item>
+            </mat-nav-list>
+          </div>
+        </div>
+      </div>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+<div class="d-md-none" *ngIf="smallScreen">
+  <nav
+    class="navbar fixed-top bg-light d-flex text-light"
+    style="
+      height: 70px;
+      background-image: linear-gradient(indigo, purple);
+      padding-left: 30px;
+      font-weight: bold;
+      font-family: 'Amatic SC';
+    "
+  >
+    <a class="navbar-brand text-light">Npnp <small style="font-size: 8px;">No Pen and paper</small></a>
+  </nav>
+  <router-outlet></router-outlet>
+  <nav class="navbar fixed-bottom navbar-light bg-light d-flex">
+    <a class="nav-link flex-fill text-center" routerLink="/dashboard">
+      <mat-icon> dashboard </mat-icon>
+    </a>
+    <a class="nav-link flex-fill text-center" routerLink="social">
+      <mat-icon> group </mat-icon>
+    </a>
+    <a class="nav-link flex-fill text-center" routerLink="notifications">
+      <mat-icon> notifications </mat-icon>
+    </a>
+    <a class="nav-link flex-fill text-center" href="#">
+      <mat-icon> message </mat-icon>
+    </a>
+    <a class="nav-link flex-fill text-center" routerLink="account">
+      <mat-icon> account_circle </mat-icon>
+    </a>
+  </nav>
+</div>

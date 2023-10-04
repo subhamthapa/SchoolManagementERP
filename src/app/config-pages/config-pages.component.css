@@ -1,6 +1,7 @@
 .pages
 {
-background-color: lightgoldenrodyellow ;
+  background-color: lightgoldenrodyellow ;
+  padding: 10px;
 }
 .pageButton
 {
@@ -11,3 +12,4 @@ background-color: lightgoldenrodyellow ;
 {
   text-decoration: none;
 }
+a { color: inherit; }

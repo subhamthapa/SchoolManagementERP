@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config.service';
 import {
-  trigger, 
-  state, 
-  style, 
-  animate, 
+  trigger,
+  state,
+  style,
+  animate,
   transition
   } from '@angular/animations';
+import { Utilities } from '../Utilities';
 
 @Component({
   selector: 'app-website-navbar',
@@ -31,7 +32,10 @@ export class WebsiteNavbarComponent implements OnInit {
   navbarBg: string = ""
   navbarTheme: string = ""
   showSideNav = false
-  constructor(private configService: ConfigService) { }
+  homePageUrl = ""
+  constructor(private configService: ConfigService) {
+    this.homePageUrl =  Utilities.getWebsiteHomePageUrl()
+  }
 
   ngOnInit(): void {
     var config = this.configService.getWebsiteConfiguration(this)

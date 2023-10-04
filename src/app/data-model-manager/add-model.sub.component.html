@@ -17,7 +17,8 @@
   </button>
   <br>
   <div *ngIf="!useJSON">
-    <mat-form-field style="width: 100%">
+    Create Data Model <br>
+    <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>Data Model Name</mat-label>
       <input
         matInput
@@ -116,7 +117,7 @@
         </div>
       </div>
     </div>
-    <mat-form-field style="width: 100%">
+    <mat-form-field appearance="outline" style="width: 100%">
       <mat-label>Column Name</mat-label>
       <input
         matInput
@@ -128,7 +129,7 @@
     <div>
       {{ addColumnJson }}
     </div>
-    <mat-form-field style="width: 100%">
+    <mat-form-field style="width: 100%" appearance="outline" >
       <mat-label>Data Type</mat-label>
       <mat-select [(ngModel)]="columnType">
         <mat-option *ngFor="let dataType of dataTypes" [value]="dataType.value">

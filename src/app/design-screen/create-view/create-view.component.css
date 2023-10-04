@@ -19,6 +19,22 @@
   padding-top: 70px;
 }
 
+.deployedList
+{
+  background-color: lightyellow;
+  padding-top: 80px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 15%;
+  position: fixed;
+  height: 100%;
+  font-family: "Roboto Mono", monospace;
+  z-index: 999;
+}
+.deployedList  *
+{
+  font-family: "Roboto Mono", monospace;
+}
 .widget-tree {
   background-color: lightyellow;
   color: green;
@@ -43,6 +59,30 @@
   -ms-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
 }
+.root-renderer {
+  background-color: rgba(232, 236, 210, 0.8) !important;
+}
+@media (min-width: 1025px){
+  .center {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+  }
+}
+.grid-editor
+{
+  background-color:lightgray !important;
+}
+.editor-div-grid-component {
+  -webkit-transition: background-color 200ms linear;
+  -moz-transition: background-color 200ms linear;
+  -o-transition: background-color 200ms linear;
+  -ms-transition: background-color 200ms linear;
+  transition: background-color 200ms linear;
+}
+.editor-div-grid-component:hover {
+  background-color: #eaf1fb;
+}
 
 .editor-component:hover {
   background-color: #eedbd5;
@@ -66,4 +106,79 @@
   min-height: 100vh;
   background-color: lightyellow;
   padding-top: 70px;
+}
+
+.top-nav button {
+  background-color: white;
+  color: black;
+}
+
+.right-click-menu {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-width: 280px;
+  background-color: rgb(255, 255, 255);
+  padding: 6px 0;
+}
+
+.right-click-menu-item {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  user-select: none;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+}
+
+.right-click-menu-item:hover {
+  background-color: rgb(208, 208, 208);
+}
+
+.right-click-menu-item:active {
+  background-color: rgb(170, 170, 170);
+}
+
+.mat-menu-item {
+  font-size: 13px;
+}
+.attrbutes-div button {
+  text-align: left;
+}
+.editor-flex {
+  padding: 20px;
+  background-color: rgb(253, 251, 242);
+}
+.fill_height {
+  height: 100% !important;
+}
+.fill_width {
+  width: 100% !important;
+}
+.m-2 {
+  margin: 1px !important;
+}
+.editor-div {
+  min-height: 30px;
+  padding: 10px;
+  background-color: rgb(253, 251, 242);
+}
+.form-div
+{
+  min-height: 30px;
+  padding: 10px;
+  background-color: rgb(220, 239, 239);
+}
+.Nameheader
+{
+  float: right;
+  color: white;
+  padding-top: 15px;
 }

@@ -1,0 +1,11 @@
+<div id="codeEditor">
+  <div id="top">
+    Editor
+    <button mat-button style="left: 90%;color:white" (click)="flag.emit([type, false])">
+      <mat-icon>
+        close
+      </mat-icon>
+    </button>
+  </div>
+  <textarea id="textEdit" rows="40" [value] = "attributes.value" [(ngModel)]="value" (keydown)="onTab($event)" (ngModelChange)="signalChange(type)"></textarea>
+</div>

@@ -21,6 +21,7 @@ import { Model } from '../utilities/model';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { DialogComponent } from '../dialog/dialog.component';
 import { Grid } from '../utilities/grid';
+import { ErrorHandler } from '../utilities/error.handler';
 
 @Component({
   selector: 'app-home-page-config',
@@ -39,17 +40,34 @@ export class HomePageConfigComponent implements OnInit {
   carouselImageModified: boolean = false;
   addImageNote: boolean = false;
   addDemoImage: boolean = false;
+
   model: Model = new Model({
     carousalImages: [],
     imageNotes: [],
     demoImages: [],
+    homePageConfig: [],
+    websiteHeader: [],
   });
   formGroupImage: any;
   formGroupImageNote: any;
   fromGroupDemoImage: any;
   index: number = 0;
   demoImageGrid: Grid = new Grid(3);
-
+  enableCarouselImage = false;
+  demoImageHeading = ""
+  demoImageHeadingColor = "light"
+  links = [
+    {
+      name: '',
+      colorScheme: 'btn-outline-primary',
+      url: '',
+    },
+    {
+      name: '',
+      colorScheme: 'btn-outline-light',
+      url: '',
+    },
+  ];
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -83,6 +101,19 @@ export class HomePageConfigComponent implements OnInit {
           { disabled: true }
         );
         this.demoImageGrid.refreshGrid(success.demo_images, {});
+        this.model.insertIntoAttribute(
+          'homePageConfig',
+          success.home_page_config
+        );
+        if (success.header) {
+          this.model.insertIntoAttribute('websiteHeader', success.header);
+          for (let i = 0; i < 2; i++) {
+            this.links[i]['name'] = success.header.buttons[i]['name'] || '';
+            this.links[i]['colorScheme'] =
+              success.header.buttons[i]['colorScheme'] || '';
+            this.links[i]['url'] = success.header.buttons[i]['url'] || '';
+          }
+        }
         this.isLoading = false;
       },
       (error) => {
@@ -136,7 +167,6 @@ export class HomePageConfigComponent implements OnInit {
         .uploadCarouselImageObservable(formData)
         .subscribe(
           (success) => {
-            debugger;
             this.addCarouselImage = false;
             var carousal = new Carousel('#website_carousel');
             carousal.to(0);
@@ -148,7 +178,7 @@ export class HomePageConfigComponent implements OnInit {
             this.isLoading = false;
           },
           (error) => {
-            this.snackbar.open(error['error']['error'], 'Ok', {
+            this.snackbar.open(ErrorHandler.getErrorTxt(error), 'Ok', {
               duration: 1000,
             });
             this.isLoading = false;
@@ -199,7 +229,8 @@ export class HomePageConfigComponent implements OnInit {
   }
   focus(id: number, flag: boolean) {
     if (!flag) {
-      $(document).ready(() => $('#text_area_' + id).trigger('focus'));
+      //$(document).ready(() => $('#text_area_' + id).trigger('focus'));
+      $(document).ready(() => $('#heading_' + id).trigger('focus'));
     } else {
       this.model.cancelChange('imageNotes');
     }
@@ -216,6 +247,7 @@ export class HomePageConfigComponent implements OnInit {
         var data = {
           id: id,
           text: $('#text_area_' + id).val(),
+          heading: $('#heading_' + id).val(),
         };
         this.isLoading = true;
         this.homePageConfigService.saveImageNoteObservable(data).subscribe(
@@ -286,17 +318,19 @@ export class HomePageConfigComponent implements OnInit {
       var formData = new FormData();
       formData.append('image', this.formGroupImageNote.get('image').value);
       var note: string = '' + $('#imageNoteText').val();
+      var heading: string = '' + $('#imageNoteHeading').val();
       formData.append('note', note);
+      formData.append('heading', heading);
       this.isLoading = true;
       this.homePageConfigService.addImageNoteObservable(formData).subscribe(
         (success) => {
           this.isLoading = false;
-          debugger;
           this.model.insertIntoAttribute('imageNotes', success, {
             disabled: true,
           });
           this.addImageNote = false;
           $('#imageNoteText').val('');
+          $('#imageNoteHeading').val('');
         },
         (error) => {
           this.isLoading = false;
@@ -306,12 +340,10 @@ export class HomePageConfigComponent implements OnInit {
     });
   }
   setDemoImageFile(event: any) {
-    if (event.target.files.length == 0)
-      return;
+    if (event.target.files.length == 0) return;
     this.fromGroupDemoImage.get('image').setValue(event.target.files[0]);
   }
-  uploadDemoImage()
-  {
+  uploadDemoImage() {
     if (!this.fromGroupDemoImage.get('image').value) {
       this.snackbar.open('Please select an image.', 'Ok', { duration: 800 });
       return;
@@ -326,28 +358,28 @@ export class HomePageConfigComponent implements OnInit {
       if (!event['flag']) return;
       var formData = new FormData();
       formData.append('image', this.fromGroupDemoImage.get('image').value);
+      formData.append('heading', this.demoImageHeading)
+      formData.append('color', this.demoImageHeadingColor)
       this.isLoading = true;
       this.homePageConfigService.addDemoImageObservable(formData).subscribe(
-        success=>
-        {
-          this.isLoading = false
-          this.addDemoImage = false
-          this.fromGroupDemoImage.get('image').value = ""
-          this.demoImageGrid.addIntoGrid(success)
-          this.demoImageGrid.applyChanges()
-        }
-        ,
-        error=>
-        {
+        (success) => {
+          this.isLoading = false;
+          this.addDemoImage = false;
+          this.fromGroupDemoImage.get('image').value = '';
+          this.demoImageGrid.addIntoGrid(success);
+          this.demoImageGrid.applyChanges();
+          this.demoImageHeading = ""
+        },
+        (error) => {
           this.snackbar.open(error['error']['error'], 'Ok', {
             duration: 1000,
           });
           this.isLoading = false;
         }
-      )
-    })
+      );
+    });
   }
-  deleteDemoImage(id: number, index: number, column:number) {
+  deleteDemoImage(id: number, index: number, column: number) {
     var dialog = this.dialog.open(DialogComponent, {
       data: {
         heading: 'Do you want to delete this Image ?',
@@ -362,8 +394,8 @@ export class HomePageConfigComponent implements OnInit {
         .subscribe(
           (success) => {
             this.demoImageGrid.deleteFromGrid(column, index);
-            this.demoImageGrid.applyChanges()
-            this.demoImageGrid.reShuffleGrid()
+            this.demoImageGrid.applyChanges();
+            this.demoImageGrid.reShuffleGrid();
             this.isLoading = false;
           },
           (error) => {
@@ -374,5 +406,73 @@ export class HomePageConfigComponent implements OnInit {
           }
         );
     });
+  }
+  updateWebsiteHeader() {
+    if (
+      this.model.deferred_attributes['websiteHeader'][0]['heading'].trim() == ''
+    ) {
+      this.snackbar.open('Heading cannot be blank', 'Ok', {
+        duration: 1000,
+      });
+      return;
+    }
+    if (
+      this.model.deferred_attributes['websiteHeader'][0][
+        'sub_heading'
+      ].trim() == ''
+    ) {
+      this.snackbar.open('Sub heading cannot be blank', 'Ok', {
+        duration: 1000,
+      });
+      return;
+    }
+    if (this.links[0].name.trim() == '' || this.links[1].name.trim() == '') {
+      this.snackbar.open('Link name cannot be blank', 'Ok', {
+        duration: 1000,
+      });
+      return;
+    }
+    if (this.links[0].url.trim() == '' || this.links[1].url.trim() == '') {
+      this.snackbar.open('Url cannot be blank', 'Ok', {
+        duration: 1000,
+      });
+      return;
+    }
+    var data = this.model.deferred_attributes['websiteHeader'][0];
+    data['buttons'] = this.links;
+    this.homePageConfigService.updateWebsiteHeaderObservable(data).subscribe(
+      (success) => {
+        this.snackbar.open('Changes saved', 'Ok', {
+          duration: 1000,
+        });
+      },
+      (error) => {
+        this.snackbar.open(ErrorHandler.getErrorTxt(error), 'Ok', {
+          duration: 1000,
+        });
+      }
+    );
+  }
+  updateConfig() {
+    this.isLoading = true
+    this.homePageConfigService
+      .updateHomePageConfigObservable(
+        this.model.deferred_attributes['homePageConfig'][0]
+      )
+      .subscribe(
+        (success) => {
+          this.isLoading = false
+          this.snackbar.open('Changes saved', 'Ok', {
+            duration: 1000,
+          });
+        },
+        (error) => {
+          this.isLoading = false
+          this.snackbar.open(ErrorHandler.getErrorTxt(error), 'Ok', {
+            duration: 1000,
+          });
+        }
+      );
+
   }
 }

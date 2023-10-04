@@ -122,7 +122,6 @@ export class AddModel {
           "columns": columns,
           "index": index
         }
-        console.log(json)
         this.dataModelManagerService.addDataModelServiceObservable(json).subscribe(
           success=>
           {

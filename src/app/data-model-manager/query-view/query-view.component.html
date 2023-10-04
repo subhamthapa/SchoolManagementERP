@@ -1,27 +1,38 @@
 <div class="area">
   <div class="row">
-    <div class="col-sm-2">
-      <mat-card matRipple *ngFor="let db of dataModels" class="db-list">
+    <div class="col-sm-1">
+      <mat-card
+        appearance="outlined"
+        matRipple
+        *ngFor="let db of dataModels"
+        class="db-list text-center"
+      >
         <mat-card-content (click)="selectedDm = db; resetEditor()">
-          <img src="/assets/images/database_image.png" width="50" />
-          <span class="codeFontMd" [style.color]="db.purged ? 'red': 'blueviolet'">
+          <img src="/assets/images/database_image.png" width="30" />
+          <br>
+          <span
+            class="codeFontMd"
+            [style.color]="db.purged ? 'red' : 'blueviolet'"
+          >
             {{ db.name }}
           </span>
-          <small *ngIf="db['purged']" style="color:red">&nbsp;**Purged</small>
+          <small *ngIf="db['purged']" style="color: red">&nbsp;**Purged</small>
         </mat-card-content>
       </mat-card>
     </div>
-    <div [class]="resultDockedToRight ? 'col-sm-4' : 'col-sm-10'">
+    <div [class]="resultDockedToRight ? 'col-sm-5' : 'col-sm-11'">
       <div>
         <mat-card class="workspace">
           <mat-card-header>
             <img src="/assets/images/database_image.png" width="25" />
             <span class="codeFont">@ {{ selectedDm.name }}</span>
-            <small *ngIf="selectedDm['purged']" style="color:red">&nbsp;**Purged</small>
+            <small *ngIf="selectedDm['purged']" style="color: red"
+              >&nbsp;**Purged</small
+            >
           </mat-card-header>
           <br />
           <mat-card-content>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <mat-label>Query Type</mat-label>
               <mat-select [(ngModel)]="queryType">
                 <mat-option
@@ -33,7 +44,7 @@
               </mat-select>
             </mat-form-field>
             &nbsp;
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <mat-label>Query Type</mat-label>
               <mat-select
                 [(ngModel)]="jsonQuery"
@@ -64,7 +75,7 @@
             <textarea
               id="jsonQueryEditor"
               class="form-control codeFont"
-              rows="15"
+              rows="10"
               style="background-color: lightyellow"
               (keydown)="onTab($event)"
               [value]="query | json"
@@ -123,35 +134,37 @@
                 </table>
               </div>
             </div>
-            <br>
-              History
-              <hr>
-              <textarea
-                id="output"
-                class="form-control codeFont"
-                rows="5"
-                style="background-color: lightyellow;font-size: 12px;"
-                [value]="queryHistory | json"
-                [style.color]="color"
-              ></textarea>
+            <br />
+            History
+            <hr />
+            <textarea
+              id="output"
+              class="form-control codeFont"
+              rows="5"
+              style="background-color: lightyellow; font-size: 12px"
+              [value]="queryHistory | json"
+              [style.color]="color"
+            ></textarea>
           </mat-card-content>
         </mat-card>
       </div>
     </div>
     <div class="col-sm-6" *ngIf="resultDockedToRight">
-      <mat-card class="workspace">
-        Result
-        <button
-          mat-button
-          style="float: right"
-          #tooltip="matTooltip"
-          matTooltip="Dock the panel to right"
-          (click)="resultDockedToRight = false"
-        >
-          <mat-icon style="font-size: 20px; vertical-align: center"
-            >arrow_downward</mat-icon
+      <mat-card appearance="outlined" class="workspace">
+        <mat-card-header>
+          <span style="float: left">Result</span>
+          <button
+            mat-button
+            style="margin-left:80%;float: right;"
+            #tooltip="matTooltip"
+            matTooltip="Dock the panel to bottom"
+            (click)="resultDockedToRight = false"
           >
-        </button>
+            <mat-icon style="font-size: 20px; vertical-align: center"
+              >arrow_downward</mat-icon
+            >
+          </button>
+        </mat-card-header>
         <hr style="margin-bottom: 15px" />
         <textarea
           *ngIf="!isDataReturned"

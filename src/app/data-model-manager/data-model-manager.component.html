@@ -3,9 +3,9 @@
     <span>
       <button
         mat-mini-fab
-        color="mat-indigo"
         #tooltip="matTooltip"
         matTooltip="Overview"
+        class = "nav-buttons"
         style="height: 40px; width: 40px"
         (click)="currentTab = 0"
       >
@@ -15,7 +15,7 @@
       </button>
       <button
         mat-mini-fab
-        color="mat-indigo"
+        class = "nav-buttons"
         #tooltip="matTooltip"
         matTooltip="Add a data model"
         style="height: 40px; width: 40px; margin-left: 20px"
@@ -25,7 +25,7 @@
       </button>
       <button
         mat-mini-fab
-        color="mat-indigo"
+        class = "nav-buttons"
         #tooltip="matTooltip"
         matTooltip="Run query on data model"
         style="height: 40px; width: 40px; margin-left: 20px"
@@ -37,7 +37,7 @@
       </button>
       <button
         mat-mini-fab
-        color="mat-indigo"
+        class = "nav-buttons"
         #tooltip="matTooltip"
         matTooltip="Refresh"
         style="height: 40px; width: 40px; margin-left: 20px"
@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-sm-4">
         <div *ngFor="let elem of dataModelGrid.defferedColumns[0]">
-          <mat-card class="shadow p-3 mb-4 bg-white rounded data-model-card">
+          <mat-card appearance="outlined" class="shadow p-3 mb-4 bg-white rounded data-model-card">
             <mat-card-content>
               <img
                 src="/assets/images/database_image.png"
@@ -107,7 +107,7 @@
       </div>
       <div class="col-sm-4">
         <div *ngFor="let elem of dataModelGrid.defferedColumns[1]">
-          <mat-card class="shadow p-3 mb-4 bg-white rounded data-model-card">
+          <mat-card appearance="outlined" class="shadow p-3 mb-4 bg-white rounded data-model-card">
             <mat-card-content>
               <img
                 src="/assets/images/database_image.png"
@@ -161,7 +161,7 @@
       </div>
       <div class="col-sm-4">
         <div *ngFor="let elem of dataModelGrid.defferedColumns[2]">
-          <mat-card class="shadow p-3 mb-4 bg-white rounded data-model-card">
+          <mat-card appearance="outlined" class="shadow p-3 mb-4 bg-white rounded data-model-card">
             <mat-card-content>
               <img
                 src="/assets/images/database_image.png"

@@ -1,16 +1,24 @@
 <div class="">
-  <div class="toolbar">
+  <div class="toolbar" (contextmenu)="disableRightClick()">
     <div class="top-nav">
       <span>
         <button
           mat-mini-fab
           color="mat-indigo"
           #tooltip="matTooltip"
-          matTooltip="Views in project"
+          [matTooltip]="widgets ? 'Deployed Views' : 'Widgets'"
           style="height: 40px; width: 40px"
+          (click)="widgets = !widgets"
         >
-          <mat-icon style="font-size: 20px; vertical-align: center"
+          <mat-icon
+            style="font-size: 20px; vertical-align: center"
+            *ngIf="widgets"
             >list</mat-icon
+          >
+          <mat-icon
+            style="font-size: 20px; vertical-align: center"
+            *ngIf="!widgets"
+            >apps</mat-icon
           >
         </button>
       </span>
@@ -19,64 +27,371 @@
           mat-mini-fab
           color="mat-indigo"
           #tooltip="matTooltip"
-          matTooltip="Overview"
+          matTooltip="Show all the widgets in tree view. Shortcut: CTRL + 2"
           class="nav-button"
           style="height: 40px; width: 40px"
+          (click)="openTreeView($event)"
         >
           <mat-icon style="font-size: 20px; vertical-align: center"
             >widgets</mat-icon
           >
         </button>
       </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Create a new view"
+          class="nav-button"
+          (click)="createNewView()"
+          style="height: 40px; width: 40px"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="vertical-align: center"
+          >
+            new_window
+          </span>
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Save as JSON file"
+          class="nav-button"
+          style="height: 40px; width: 40px"
+          (click)="saveLocal()"
+        >
+          <mat-icon style="font-size: 20px; vertical-align: center"
+            >save</mat-icon
+          >
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Load JSON file"
+          class="nav-button"
+          style="height: 40px; width: 40px"
+          (click)="fileInp.click()"
+        >
+          <input
+            #fileInp
+            type="file"
+            hidden
+            (change)="jsonFileChanged($event)"
+          />
+          <mat-icon style="font-size: 20px; vertical-align: center"
+            >upload</mat-icon
+          >
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Render web page"
+          class="nav-button"
+          style="height: 40px; width: 40px"
+          (click)="render()"
+        >
+          <mat-icon style="font-size: 20px; vertical-align: center"
+            >fullscreen</mat-icon
+          >
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Zoom In. Current:{{ zoomScale_ * 100 | number : '1.0' }}%"
+          class="nav-button"
+          (click)="zoomIn()"
+          style="height: 40px; width: 40px; top: 5px"
+        >
+          <mat-icon style="font-size: 30px; vertical-align: center"
+            >zoom_in</mat-icon
+          >
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Zoom Out. Current:{{
+            zoomScale_ * 100 | number : '1.0'
+          }}%"
+          class="nav-button"
+          (click)="zoomOut()"
+          style="height: 40px; width: 40px; top: 5px"
+        >
+          <mat-icon style="font-size: 30px; vertical-align: center"
+            >zoom_out</mat-icon
+          >
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Refresh editor. Plesae note that this will remove all the image loaded and they must be loaded again"
+          class="nav-button"
+          (click)="refreshScreen()"
+          style="height: 40px; width: 40px"
+        >
+          <mat-icon style="font-size: 20px; vertical-align: center"
+            >refresh</mat-icon
+          >
+        </button>
+      </span>
+      <span class="nav-button">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          matTooltip="Deploy the json view"
+          class="nav-button"
+          (click)="deployViewToWeb()"
+          style="height: 40px; width: 40px"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="vertical-align: center"
+          >
+            deployed_code
+          </span>
+        </button>
+      </span>
+      <span class="nav-button" *ngIf="!justLoaded">
+        <button
+          mat-mini-fab
+          color="mat-indigo"
+          #tooltip="matTooltip"
+          [matTooltip]="toggleUndoRedo? 'Redo ' + action : 'Undo ' + action"
+          class="nav-button"
+          (click)="undoRedo()"
+          style="height: 40px; width: 40px"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="vertical-align: center"
+            *ngIf="!toggleUndoRedo"
+          >
+            undo
+          </span>
+          <span
+            class="material-symbols-outlined"
+            style="vertical-align: center"
+            *ngIf="toggleUndoRedo"
+          >
+            redo
+          </span>
+        </button>
+      </span>
+      <div class="Nameheader" *ngIf="currentLoadedView">
+        <span><mat-icon style="vertical-align: middle;">info</mat-icon>
+        {{currentLoadedView['name']}}</span>
+      </div>
     </div>
   </div>
-  <div *ngIf="widgets" class="attrbutes-div">
-    <mat-tree
-      [dataSource]="transformer.dataSource"
-      [treeControl]="transformer.treeControl"
-      class="widget-tree"
-    >
-      <!-- This is the tree node template for leaf nodes -->
-      <mat-tree-node *matTreeNodeDef="let node">
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <button mat-icon-button disabled></button>
-        <button
-          mat-button
-          class="side-navbar-button"
-          (click)="insert(node.name)"
-        >
-          {{ node.name }}
-        </button>
-      </mat-tree-node>
-      <!-- This is the tree node template for expandable nodes -->
-      <mat-tree-node
-        *matTreeNodeDef="let node; when: transformer.hasChild"
+  <div>
+    <div *ngIf="widgets" class="attrbutes-div">
+      <mat-tree
+        [dataSource]="transformer.dataSource"
+        [treeControl]="transformer.treeControl"
         class="widget-tree"
       >
-        <button
-          mat-icon-button
-          matTreeNodeToggle
-          [attr.aria-label]="'Toggle ' + node.name"
+        <!-- This is the tree node template for leaf nodes -->
+        <mat-tree-node *matTreeNodeDef="let node">
+          <!-- use a disabled button to provide padding for tree leaf -->
+          <button mat-icon-button disabled></button>
+          <button
+            mat-button
+            class="side-navbar-button"
+            (click)="insert(node.name)"
+          >
+            {{ node.name }}
+          </button>
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-tree-node
+          *matTreeNodeDef="let node; when: transformer.hasChild"
+          class="widget-tree"
         >
-          <mat-icon class="mat-icon-rtl-mirror">
-            {{
-              transformer.treeControl.isExpanded(node)
-                ? "expand_more"
-                : "chevron_right"
-            }}
-          </mat-icon>
-        </button>
-        {{ node.name }}
-      </mat-tree-node>
-    </mat-tree>
-  </div>
-  <div class="row body">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8" id="canvas">
-      <div class="render" id="renderHtml" [innerHTML]="innerHtml" style="min-height: 100%;"></div>
+          <button
+            mat-icon-button
+            matTreeNodeToggle
+            [attr.aria-label]="'Toggle ' + node.name"
+          >
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{
+                transformer.treeControl.isExpanded(node)
+                  ? "expand_more"
+                  : "chevron_right"
+              }}
+            </mat-icon>
+          </button>
+          {{ node.name }}
+        </mat-tree-node>
+      </mat-tree>
     </div>
-    <div class="col-sm-2">
-      <app-attribute-view [attributes]="attributes" class="position-fixed"></app-attribute-view>
+    <div *ngIf="!widgets" class="deployedList">
+      <div *ngIf="currentLoadedView"
+        >Current View: {{ currentLoadedView["name"] }}
+        <hr />
+      </div>
+      <div *ngIf="deployedViews_ && deployedViews_.length == 0">
+        There are no views deployed.
+      </div>
+      <mat-accordion class="example-headers-align" multi>
+        <mat-expansion-panel *ngFor="let view of deployedViews_">
+          <mat-expansion-panel-header>
+            <mat-panel-title> {{ view["name"] }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-form-field appearance="outline" style="width: 100% !important">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="view['name']" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100% !important">
+            <mat-label>Url</mat-label>
+            <input matInput [(ngModel)]="view['url']" />
+          </mat-form-field>
+          <section style="width: 100% !important">
+            <mat-radio-group [(ngModel)]="view['permission']" name="permission">
+              <mat-radio-button value="open"> Public </mat-radio-button>
+              <mat-radio-button value="restrict_to_logged_in">
+                Logged In
+              </mat-radio-button>
+            </mat-radio-group>
+          </section>
+          <button
+            mat-mini-fab
+            color="primary"
+            style="font-size: 10px"
+            (click)="loadDeployedView(view)"
+          >
+            Load
+          </button>
+          &nbsp;
+          <button mat-mini-fab color="primary" style="font-size: 10px">
+            Save
+          </button>
+          &nbsp;
+          <button mat-mini-fab color="primary" style="font-size: 10px" (click)="purgeView(view)">
+            Purge
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="row body">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8" id="canvas" (contextmenu)="disableRightClick()">
+        <div
+          class="render"
+          [style.zoom]="zoomScale_"
+          id="renderHtml"
+          innstyle="min-height: 100%;"
+        >
+          <ng-template widget></ng-template>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <app-attribute-view
+          [attributes]="attributes"
+          class="position-fixed"
+          (value)="editorFalgChanged($event)"
+          (signal)="signalChanged($event)"
+        ></app-attribute-view>
+      </div>
     </div>
   </div>
+  <div
+    style="visibility: hidden; position: fixed"
+    [style.left]="menuTopLeftPosition.x"
+    [style.top]="menuTopLeftPosition.y"
+    [matMenuTriggerFor]="menu"
+  ></div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item class="mat-menu-item" (click)="deleteWidget()">
+    <div class="mat-menu-item">
+      <mat-icon style="font-size: 20px; vertical-align: middle"
+        >delete</mat-icon
+      >
+      <span>Delete</span>
+    </div>
+  </button>
+  <button mat-menu-item class="mat-menu-item" (click)="move(true)">
+    <div class="mat-menu-item">
+      <mat-icon style="font-size: 20px; vertical-align: middle"
+        >keyboard_double_arrow_up</mat-icon
+      >
+      <span>Move element up</span>
+    </div>
+  </button>
+  <button mat-menu-item class="mat-menu-item" (click)="move(false)">
+    <div class="mat-menu-item">
+      <mat-icon style="font-size: 20px; vertical-align: middle">
+        keyboard_double_arrow_down
+      </mat-icon>
+      <span>Move element down</span>
+    </div>
+  </button>
+  <button
+    mat-menu-item
+    class="mat-menu-item"
+    *ngIf="callerContext && callerContext.is_container && isRoot()"
+  >
+    <div class="mat-menu-item" (click)="setAsRoot()">
+      <mat-icon style="font-size: 20px; vertical-align: middle"
+        >swap_vert</mat-icon
+      >
+      <span>Set as root</span>
+    </div>
+  </button>
+  <button
+    mat-menu-item
+    class="mat-menu-item"
+    *ngIf="
+      callerContext &&
+      rootComponent &&
+      callerContext.is_container &&
+      (rootComponent.uniqueKey == callerContext.uniqueKey ||
+        (rootComponent.constructor.name == callerContext.constructor.name &&
+          rootComponent.uniqueKey == callerContext.uniqueKey))
+    "
+  >
+    <div class="mat-menu-item" (click)="unsetAsRoot()">
+      <mat-icon style="font-size: 20px; vertical-align: middle"
+        >swap_vert</mat-icon
+      >
+      <span>Unset as root</span>
+    </div>
+  </button>
+  <button mat-menu-item class="mat-menu-item" (click)="setBehaviour()">
+    <div class="mat-menu-item">
+      <mat-icon style="font-size: 20px; vertical-align: middle">
+        psychology
+      </mat-icon>
+      <span>Set behaviour</span>
+    </div>
+  </button>
+</mat-menu>
+<app-code-editor
+  *ngIf="editCode"
+  (flag)="editorFalgChanged($event)"
+  [attributes]="attributes"
+  [type]="editorCallerType"
+  [owner]="this"
+>
+</app-code-editor>

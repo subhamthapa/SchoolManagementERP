@@ -14,7 +14,10 @@ export class HomeComponent implements OnInit {
   carouselImages: any[] = []
   imageNotes: any[] = []
   demoImages: any[] = []
+  header : any = {}
+  homePageConfig: any = {}
   loading: boolean = false
+  backgroundColor = ""
   constructor(private dataServce: HomeDataService) { }
 
   ngOnInit(): void {

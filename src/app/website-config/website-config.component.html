@@ -1,22 +1,63 @@
-<div class="container-fluid" style="padding-top: 30px;">
-    <div class="row">
-        <div class="col-sm-3">
-            <mat-card class="shadow p-3 mb-5 bg-white rounded" style="position: fixed; top:30px; width:  calc(100vw/4.5);">
-                <mat-card-header>Configuration</mat-card-header>
-                <mat-card-content>
-                    <div style="padding: 10px;">
-                        <button mat-fab color="primary" style="margin-top: 10px;"
-                        routerLink="general-config" #tooltip="matTooltip" matTooltip="Edit Website Configuration">
-                            <mat-icon>edit_square</mat-icon>
-                        </button>
-                        <hr>
-                        <app-config-pages></app-config-pages>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="col-sm-9">
-            <router-outlet></router-outlet>
-        </div>
+<div class="container-fluid d-none d-lg-block" style="padding-top: 30px">
+  <div class="row">
+    <div class="col-sm-3">
+      <mat-card
+        appearance="outlined"
+        class="shadow p-3 mb-5 bg-white rounded"
+        style="position: fixed; top: 30px; width: calc(100vw / 4.5)"
+      >
+        <mat-card-header>Configuration</mat-card-header>
+        <mat-card-content>
+          <div style="padding: 10px">
+            <button
+              mat-fab
+              color="primary"
+              style="margin-top: 10px"
+              routerLink="general-config"
+              #tooltip="matTooltip"
+              matTooltip="Edit Website Configuration"
+            >
+              <mat-icon>edit_square</mat-icon>
+            </button>
+            <hr />
+            <app-config-pages></app-config-pages>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
+    <div class="col-sm-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<div class="d-lg-none">
+  <div class="phoneTopNav">
+    <button
+      mat-mini-fab
+      color="transparent"
+      style="margin-top: 10px; margin-left: 20px; color: white"
+      routerLink="general-config"
+      #tooltip="matTooltip"
+      matTooltip="Edit Website Configuration"
+    >
+      <mat-icon>edit_square</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="transparent"
+      style="margin-top: 10px; margin-left: 20px; color: white"
+      (click)="displayApp=!displayApp"
+      #tooltip="matTooltip"
+      matTooltip="Edit Website Configuration"
+    >
+      <mat-icon>settings</mat-icon>
+    </button>
+    <div *ngIf="displayApp">
+      <app-config-pages></app-config-pages>
+      <br><br>
+    </div>
+  </div>
+  <div style="padding-top: 65px;" *ngIf="smallScreen">
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,0 +1,120 @@
+<div class="top">
+  <mat-card>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-lg-3 text-center">
+          <img
+            [src]="apiHost + userData['profile_picture_lg']"
+            *ngIf="userData && !userData.default"
+            class="rounded-circle img-fluid"
+            width="250"
+            height="250"
+          />
+          <span
+            class="material-symbols-outlined"
+            *ngIf="userData && userData.default"
+            style="font-size: 200px"
+          >
+            face
+          </span>
+          <div class="text-center" *ngIf="userData">
+            <br />
+            <span class="grey">@{{ userData.username }}</span>
+            <div class="grey">
+              <h3 style="padding-bottom: 0px; margin-bottom: 0px">
+                <strong>{{ userData.user_data.name }}</strong>
+              </h3>
+              {{ userData.user_data.occupation }}
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2" *ngIf="userData"></div>
+        <div class="col-lg-6" *ngIf="userData">
+          <div class="row">
+            <div class="col-sm-2">
+              <h3>Name</h3>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ userData.user_data.name }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <h3>Email</h3>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ userData.user_data.email }}
+            </div>
+          </div>
+          <div
+            class="row"
+            *ngIf="userData.user_data.occupation.trim().length != 0"
+          >
+            <div class="col-sm-2">
+              <h3>Occupation</h3>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              {{ userData.user_data.occupation }}
+            </div>
+          </div>
+          <div *ngIf="userData && userData.projects.length != 0">
+            <h3>Projects</h3>
+            <hr />
+            <mat-selection-list>
+              <a
+                [href]="'/project/' + project.platform_name + '/webapp'"
+                target="_blank"
+                *ngFor="let project of userData.projects"
+              >
+                <mat-list-item>
+                  <mat-icon style="vertical-align: middle">link</mat-icon>
+                  {{ project.name }}
+                  <small style="padding-left: 20px; color: grey"
+                    >Click to open the website in new tab</small
+                  >
+                </mat-list-item>
+              </a>
+            </mat-selection-list>
+          </div>
+          <div *ngIf="userData && userData.projects.length == 0">
+            <h3 style="color: grey" class="text-center">
+              The user has not created any projects yet
+            </h3>
+          </div>
+        </div>
+        <div class="col-lg-1 text-center" *ngIf="userData">
+          <button
+            mat-raised-button
+            style="width: 100%"
+            color="primary"
+            (click)="sendConnectionRequest(userData.username)"
+            *ngIf="!userData.connection_req_sent"
+          >
+            connect
+          </button>
+          <div *ngIf="userData.connection_req_sent">
+            <small style="color: orange;">Pending Approval</small>
+            <button
+              mat-raised-button
+              style="width: 100%;"
+              class="text-center"
+              color="warn"
+              (click)="cancelReq(userData.username)"
+            >
+              <mat-icon style="vertical-align: middle;text-align: center;margin: 0px;">close</mat-icon>
+            </button>
+          </div>
+          <button
+            mat-raised-button
+            style="width: 100%; margin-top: 5px"
+            color="accent"
+            routerLink="/dashboard/social"
+            (click)="userData = null"
+          >
+            close
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

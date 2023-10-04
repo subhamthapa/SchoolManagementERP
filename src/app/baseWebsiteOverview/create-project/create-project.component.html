@@ -1,0 +1,19 @@
+<div>
+  <h3>Create a project</h3>
+  <hr>
+  <form>
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Project Name</mat-label>
+      <input matInput placeholder="Project Name" [(ngModel)]="projectName" name="project">
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Platform Name</mat-label>
+      <input matInput placeholder="Platform Name" [(ngModel)]="platform" name="platform">
+      <mat-hint>Please give a unqiue short platform name.</mat-hint>
+    </mat-form-field>
+    <mat-error *ngIf="errorMessage != ''" style="font-size: 12px;">**{{errorMessage}}</mat-error>
+    <mat-checkbox name="darkTheme" [(ngModel)]="isDarkTheme">Dark Theme</mat-checkbox>
+    <br>
+    <button mat-raised-button color="primary" (click)="createProject_()">Create</button>
+  </form>
+</div>

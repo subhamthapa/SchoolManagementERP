@@ -13,32 +13,32 @@ interface Widget {
 const TREE_DATA: Widget[] = [
   {
     name: 'Input',
-    children: [{ name: 'String' }, { name: 'Text' }, { name: 'Date' }],
+    children: [{ name: 'String' }, { name: 'Text' }, { name: 'Date' }, { name: 'Checkbox' }, {name: 'RadioButton'}],
   },
   {
     name: 'Forms',
-    children: [
-      { name: 'Basic Input Form' },
-    ],
+    children: [{ name: 'Basic Input Form' }],
   },
   {
     name: 'Layout',
-    children: [
-      { name: 'Grid '},
-    ],
+    children: [{ name: 'Grid' }, { name: 'Flex' }],
   },
   {
     name: 'Section',
     children: [
-      { name: 'Paragraph'}, { name: 'Div'}
+      { name: 'Paragraph' },
+      { name: 'Heading' },
+      { name: 'HR' },
+      { name: 'Div' },
+      { name: 'Card' },
+      { name: 'ImageCard' },
+      { name: 'Image' },
     ],
   },
   {
     name: 'Buttons',
-    children: [
-      { name: 'Button'}, { name: 'Checkbox'}
-    ],
-  }
+    children: [{ name: 'Button' }, { name: 'Checkbox' }],
+  },
 ];
 
 export interface WidgetNode {
@@ -67,7 +67,10 @@ export class Transformer {
     (node) => node.children
   );
 
-  public dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  public dataSource = new MatTreeFlatDataSource(
+    this.treeControl,
+    this.treeFlattener
+  );
 
   constructor() {
     this.dataSource.data = TREE_DATA;

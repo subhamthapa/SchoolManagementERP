@@ -1,0 +1,91 @@
+<div class="d-none d-md-block">
+  <div class="baseWebsiteNavbar" [style.height.px]="baseNavbarHeight">
+    <div class="baseNavbarLinks">
+      <a
+        routerLink="login"
+        [routerLinkActive]="['active']"
+        (click)="baseNavbarHeight = 350; showHeader = true; isLogin = true"
+        >Login</a
+      >
+      <a>Documentation</a>
+      <a>Products</a>
+      <a>About</a>
+      <a
+        routerLink=""
+        [routerLinkActive]="['active']"
+        (click)="baseNavbarHeight = 350; showHeader = true; isLogin = false"
+        >Home</a
+      >
+    </div>
+    <div class="d-none d-md-block header" *ngIf="showHeader">
+      <div class="baseHederCenter center .d-none .d-md-block .d-lg-none">
+        <h1>Design and Deploy Web Applications</h1>
+        <div>
+          <h4>Create scalable applications without coding</h4>
+          <ul class="baseLi">
+            <li>
+              Hundreds of prebuilt modules which can be used independently
+            </li>
+            <li>A very simple and easy to use website designer</li>
+            <li>Custom support team for each user</li>
+          </ul>
+        </div>
+        <div class="d-flex accountActions">
+          <button
+            mat-raised-button
+            style="width: 25%"
+            routerLink="login"
+            (click)="baseNavbarHeight = 350; showHeader = true; isLogin = true"
+            *ngIf="!isLogin"
+          >
+            Login
+          </button>
+          <button
+            mat-raised-button
+            style="width: 25%; color: white"
+            color="accent"
+            routerLink="signup"
+            (click)="baseNavbarHeight = 80; showHeader = false; isLogin = false"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-md-none" style="position: fixed;width: 100%;background-image: linear-gradient(black, indigo);">
+  <div style="padding-left: 35%;padding-top: 20px;">
+    <div style="font-family: 'Amatic SC'; color: white; font-weight: bold; font-size: 25px;">No Pen No Paper
+    <button mat-fab color="white" style="padding: 0px !important;top:-12px;  float: right;" (click)="showSideNav=!showSideNav">
+      <mat-icon style="vertical-align: middle;">
+        widgets
+      </mat-icon>
+    </button>
+    </div>
+  </div>
+</div>
+<div class="d-md-none scroller" style="position: fixed; width: 100%; color: white;top:70px" *ngIf="showSideNav">
+  <div>
+    <mat-selection-list>
+      <mat-list-item routerLink="" [routerLinkActive]="['active']" (click)="showSideNav=false">
+        <mat-icon style="vertical-align: middle;">home</mat-icon> &nbsp; Home
+      </mat-list-item>
+      <mat-list-item routerLink="" [routerLinkActive]="['active']" (click)="showSideNav=false">
+        <mat-icon style="vertical-align: middle;">article</mat-icon> &nbsp; About
+      </mat-list-item>
+      <mat-list-item routerLink="" [routerLinkActive]="['active']" (click)="showSideNav=false">
+        <mat-icon style="vertical-align: middle;">apps</mat-icon> &nbsp; Products
+      </mat-list-item>
+      <mat-list-item routerLink="" [routerLinkActive]="['active']" (click)="showSideNav=false">
+        <mat-icon style="vertical-align: middle;">folder</mat-icon> &nbsp; Docs
+      </mat-list-item>
+      <mat-list-item routerLink="/login" [routerLinkActive]="['active']" (click)="showSideNav=false">
+        <mat-icon style="vertical-align: middle;">person</mat-icon> &nbsp; Login
+      </mat-list-item>
+      <mat-list-item routerLink="/signup" [routerLinkActive]="['active']" (click)="showSideNav=false">
+        <mat-icon style="vertical-align: middle;">person_add</mat-icon> &nbsp; Register
+      </mat-list-item>
+    </mat-selection-list>
+  </div>
+</div>

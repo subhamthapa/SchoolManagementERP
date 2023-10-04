@@ -1,6 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -36,6 +37,10 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatTreeModule } from '@angular/material/tree';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AuthService, AuthInterceptor, AuthGuard } from './auth-service';
 import { DashboardSideNavComponent } from './dashboard-side-nav/dashboard-side-nav.component';
@@ -53,6 +58,25 @@ import { AddModel } from './data-model-manager/add-model.sub.component';
 import { QueryViewComponent } from './data-model-manager/query-view/query-view.component';
 import { CreateViewComponent } from './design-screen/create-view/create-view.component';
 import { AttributeViewComponent } from './design-screen/create-view/attribute-view/attribute-view.component';
+import { design_screen_declarations } from './design-screen/module';
+import { WidgetDirective } from './design-screen/widgets/directive';
+import { CodeEditorComponent } from './design-screen/code-editor/code-editor.component';
+import { RendererDirective } from './json-view-renderer/directive';
+import { JsonViewRendererComponent } from './json-view-renderer/json-view-renderer.component';
+import { BaseWebsiteNavbarComponent } from './base-website-navbar/base-website-navbar.component';
+import { BaseWebsiteComponent } from './base-website/base-website.component';
+import { DivWidgetComponent } from './design-screen/widgets/div-widget.component';
+import { BaseWebsiteHomeComponent } from './base-website-home/base-website-home.component';
+import { BaseWebsiteLoginComponent } from './base-website-login/base-website-login.component';
+import { BaseWebsiteSignUpComponent } from './base-website-sign-up/base-website-sign-up.component';
+import { BaseWebsiteDashboardComponent } from './base-website-dashboard/base-website-dashboard.component';
+import { BaseWebsiteOverviewComponent } from './base-website-overview/base-website-overview.component';
+import { CreateProjectComponent } from './baseWebsiteOverview/create-project/create-project.component';
+import { SocialComponent } from './social/social.component';
+import { AccountComponent } from './account/account.component';
+import { AccountInfo } from './account-info.model';
+import { AccountInfoComponent } from './social/account-info/account-info.component';
+import { BaseWebsiteNotificationComponent } from './base-website-notification/base-website-notification.component';
 
 function init() {
   let url = window.location.href;
@@ -79,30 +103,48 @@ function init() {
     console.log(Exception);
   }
 }
-
+var declarations = [
+  AppComponent,
+  WebsiteHomeComponent,
+  WebsiteNavbarComponent,
+  HomeComponent,
+  AboutComponent,
+  WebsiteFooterComponent,
+  LoginComponent,
+  DashboardComponent,
+  DashboardSideNavComponent,
+  WebsiteConfigComponent,
+  GeneralConfigComponent,
+  LoadingComponent,
+  ConfigPagesComponent,
+  HomePageConfigComponent,
+  DialogComponent,
+  DesignScreenComponent,
+  DataModelManagerComponent,
+  QueryViewComponent,
+  CreateViewComponent,
+  AttributeViewComponent,
+  JsonViewRendererComponent,
+  WidgetDirective,
+  RendererDirective,
+  CodeEditorComponent,
+  BaseWebsiteNavbarComponent,
+  BaseWebsiteComponent,
+  BaseWebsiteHomeComponent,
+  BaseWebsiteLoginComponent,
+  BaseWebsiteSignUpComponent,
+  BaseWebsiteDashboardComponent,
+  BaseWebsiteOverviewComponent,
+  CreateProjectComponent,
+  SocialComponent,
+  AccountComponent,
+  AccountInfoComponent,
+  BaseWebsiteNotificationComponent
+];
+declarations = declarations.concat(design_screen_declarations);
+console.log(declarations);
 @NgModule({
-  declarations: [
-    AppComponent,
-    WebsiteHomeComponent,
-    WebsiteNavbarComponent,
-    HomeComponent,
-    AboutComponent,
-    WebsiteFooterComponent,
-    LoginComponent,
-    DashboardComponent,
-    DashboardSideNavComponent,
-    WebsiteConfigComponent,
-    GeneralConfigComponent,
-    LoadingComponent,
-    ConfigPagesComponent,
-    HomePageConfigComponent,
-    DialogComponent,
-    DesignScreenComponent,
-    DataModelManagerComponent,
-    QueryViewComponent,
-    CreateViewComponent,
-    AttributeViewComponent,
-  ],
+  declarations: declarations,
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -131,7 +173,11 @@ function init() {
     MatRippleModule,
     MatTableModule,
     MatTreeModule,
-    CdkMenuModule
+    MatMenuModule,
+    CommonModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ConfigService,

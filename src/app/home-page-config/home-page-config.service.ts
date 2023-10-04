@@ -45,6 +45,16 @@ export class HomePageConfigService {
       data["platform"] = Utilities.getPlatform()
       return this.httpClient.post(WebAppConstants.deleteDemoImage, data);
     }
+    public updateWebsiteHeaderObservable(data: any)
+    {
+      data["platform"] = Utilities.getPlatform()
+      return this.httpClient.post(WebAppConstants.updateWebsiteHeader, data);
+    }
+    public updateHomePageConfigObservable(data: any)
+    {
+      data["platform"] = Utilities.getPlatform()
+      return this.httpClient.put(WebAppConstants.updateWebsiteConfig, data);
+    }
 }
 
 

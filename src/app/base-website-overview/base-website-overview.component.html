@@ -1,0 +1,154 @@
+<div class="container-fluid capsule">
+  <h1>Overview</h1>
+  <hr />
+  <br />
+  <div class="row equal">
+    <div class="col-lg-6">
+      <mat-card class="shadow p-3 mb-2 bg-white rounded displayCard">
+        <mat-card-header>
+          <h3>
+            <span> <mat-icon>inventory</mat-icon> </span>&nbsp;Projects
+          </h3>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="text-center" *ngIf="projects.length == 0">
+            <span
+              class="material-symbols-outlined"
+              style="vertical-align: middle; font-size: 70px"
+            >
+              sentiment_dissatisfied </span
+            ><br />
+            <small>You have not created any project</small>
+            <br />
+            <button
+              mat-raised-button
+              color="primary"
+              style="margin-top: 5px"
+              (click)="createProject()"
+            >
+              <mat-icon>add</mat-icon>
+              create
+            </button>
+            <br />
+          </div>
+          <div class="d-xl-none" *ngIf="projects.length != 0">
+            <div class="list-group">
+              <div class="list-group-item" *ngFor="let project of projects">
+                <mat-icon>web_asset</mat-icon>
+                &nbsp;
+                {{ project.name }}
+                <span style="float: right;">
+                  <a
+                    [href]="'/project/' + project.platform_name + '/dashboard'"
+                    target="_blank"
+                    style="padding: 5px;"
+                    matTooltip="Open Dashboard"
+                    ><mat-icon>dashboard</mat-icon>
+                    </a
+                  >
+                  &nbsp;
+                  <a
+                    [href]="'/project/' + project.platform_name + '/webapp'"
+                    target="_blank"
+                    style="padding: 5px;"
+                    matTooltip="Open Website"
+                    ><mat-icon>touch_app</mat-icon></a
+                  >
+                </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="projects.length != 0" class="d-none d-xl-block">
+            <mat-list>
+              <mat-list-item *ngFor="let project of projects">
+                <mat-icon
+                  matListItemIcon
+                  style="
+                    transform: scale(1.5);
+                    vertical-align: middle;
+                    padding-top: 2px;
+                  "
+                  >web_asset</mat-icon
+                >
+                <div matListItemTitle>
+                  {{ project.name }}
+                  <div style="float: right; padding-top: 20px">
+                    <a
+                      [href]="
+                        '/project/' + project.platform_name + '/dashboard'
+                      "
+                      target="_blank"
+                    >
+                      <mat-icon style="vertical-align: middle">
+                        dashboard </mat-icon
+                      >&nbsp;Dashboard
+                    </a>
+                    &nbsp;
+                    <a
+                      [href]="'/project/' + project.platform_name + '/webapp'"
+                      target="_blank"
+                    >
+                      <mat-icon style="vertical-align: middle">
+                        touch_app </mat-icon
+                      >&nbsp;Open webpage
+                    </a>
+                  </div>
+                </div>
+                <div matListItemLine>{{ project.updated | date }}</div>
+              </mat-list-item>
+            </mat-list>
+            <button
+              mat-raised-button
+              color="primary"
+              style="margin-top: 5px"
+              (click)="createProject()"
+            >
+              <mat-icon>add</mat-icon>
+              create
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-lg-6">
+      <mat-card class="shadow p-3 mb-2 bg-white rounded">
+        <mat-card-header>
+          <h3>
+            <span> <mat-icon>group</mat-icon> </span>&nbsp;Entitlements
+          </h3>
+        </mat-card-header>
+        <mat-card-content>
+          You do not have entitlements to any projects yet
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <mat-card class="shadow p-3 mb-2 bg-white rounded">
+    <mat-card-header>
+      <h3>
+        <span class="material-symbols-outlined" style="vertical-align: middle">
+          group_work </span
+        >&nbsp;Team
+      </h3>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="noTeam">
+        <div class="text-center">
+          <span
+            class="material-symbols-outlined"
+            style="vertical-align: middle; font-size: 70px"
+          >
+            sick </span
+          ><br />
+          <small>You do not have any team</small>
+          <br />
+          <button mat-raised-button color="primary" style="margin-top: 5px">
+            <mat-icon>add</mat-icon>
+            create
+          </button>
+          <br />
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

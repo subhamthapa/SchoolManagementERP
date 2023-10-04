@@ -26,7 +26,19 @@ export class HomeDataService
             view.carouselImages = success.carousel_images
             view.imageNotes = success.image_notes
             view.demoImages = success.demo_images
+            view.homePageConfig = success.home_page_config
+            view.header = success.header
             view.loading = false
+            var colors = success.header.background_color.split(",")
+            if (colors.length > 1)
+            {
+              view.backgroundColor = `background-image: linear-gradient(${colors.join(',')})`
+            }
+            else
+            {
+              view.backgroundColor = `background-color: ${colors[0]}`
+
+            }
         }
         ,
         error=>

@@ -1,0 +1,171 @@
+<div class="baseDiv container">
+  <h1>Register</h1>
+  <hr />
+  <form [formGroup]="userCreateForm" (ngSubmit)="signUp()">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label class="label">First Name</mat-label>
+          <input
+            matInput
+            placeholder="First Name"
+            [formControl]="firstNameControl"
+            [required]="true"
+          />
+          <mat-error *ngIf="firstNameControl.errors?.['required']"
+            >First Name cannot be blank</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label class="label">Middle Name</mat-label>
+          <input
+            matInput
+            placeholder="First Name"
+            [formControl]="middleNameControl"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label class="label">Last Name</mat-label>
+          <input
+            matInput
+            placeholder="Last Name"
+            [formControl]="lastNameControl"
+            [required]="true"
+          />
+          <mat-error *ngIf="lastNameControl.errors?.['required']"
+            >Last Name cannot be blank</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label class="label">Phone No</mat-label>
+          <input
+            matInput
+            placeholder="Phone No"
+            [formControl]="phoneNoControl"
+            [required]="true"
+          />
+          <mat-error *ngIf="phoneNoControl.errors?.['required']"
+            >Phone No cannot be blank</mat-error
+          >
+          <mat-error *ngIf="phoneNoControl.errors?.['phoneNoNotAvailable']"
+            >Phone No already registered.</mat-error
+          >
+          <mat-error *ngIf="phoneNoControl.errors?.['pattern']"
+            >Please enter a 10 digit phone number.</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label class="label">Email</mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            [formControl]="emailControl"
+            [required]="true"
+          />
+          <mat-error *ngIf="emailControl.errors?.['required']"
+            >Email cannot be blank</mat-error
+          >
+          <mat-error *ngIf="emailControl.errors?.['emailNotAvailable']"
+            >Email already registered.</mat-error
+          >
+          <mat-error *ngIf="emailControl.errors?.['email']"
+            >Invalid email</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label class="label">Occupation</mat-label>
+          <input
+            matInput
+            placeholder="Occupation - Student, business, engineer,.."
+            [formControl]="occupationControl"
+            [required]="true"
+          />
+          <mat-error *ngIf="occupationControl.errors?.['required']"
+            >Occupation cannot be blank</mat-error
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <br />
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label class="label">Username</mat-label>
+      <input
+        matInput
+        placeholder="Username"
+        [formControl]="usernameControl"
+        [required]="true"
+      />
+      <mat-error *ngIf="usernameControl.errors?.['required']"
+        >Username cannot be blank</mat-error
+      >
+      <mat-error *ngIf="usernameControl.errors?.['usernameNotAvailable']"
+        >Username already taken. Please choose a different username</mat-error
+      >
+    </mat-form-field>
+    <div class="form-group">
+      <textarea
+        class="form-control"
+        placeholder="Address"
+        rows="8"
+        [formControl]="addressControl"
+        required="true"
+      ></textarea>
+      <mat-error *ngIf="addressControl.errors?.['required']"
+        ><small>*Address cannot be blank</small>
+      </mat-error>
+    </div>
+    <br />
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label class="label">Password</mat-label>
+      <input
+        matInput
+        placeholder="Password"
+        type="password"
+        [formControl]="passwordControl"
+        [required]="true"
+      />
+      <mat-error *ngIf="passwordControl.errors?.['required']"
+        >Password cannot be blank</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label class="label">Re-enter password</mat-label>
+      <input
+        matInput
+        placeholder="Re-enter password"
+        type="password"
+        [formControl]="password2Control"
+        [required]="true"
+      />
+      <mat-error *ngIf="password2Control.errors?.['required']"
+        >Password cannot be blank</mat-error
+      >
+      <mat-error *ngIf="password2Control.errors?.['nomatch']"
+        >Passwords does not match</mat-error
+      >
+    </mat-form-field>
+    <br />
+    <button mat-raised-button color="primary" type="submit">
+      Sign Up
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+        *ngIf="loading"
+      ></span>
+    </button>
+  </form>
+</div>

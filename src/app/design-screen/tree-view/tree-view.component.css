@@ -1,0 +1,28 @@
+.treeParent
+{
+  min-height: 500px;
+}
+.element-name
+{
+  font-family: "Roboto Mono", monospace;
+  padding-left: 10px;
+}
+.element-button
+{
+  font-family: "Roboto Mono", monospace;
+  font-size: 10px;
+}
+
+.code-font
+{
+  font-family: "Roboto Mono", monospace;
+  color: red;
+}
+.icon
+{
+  vertical-align: middle;
+}
+.root-indicator
+{
+  padding-left: 20px;
+}

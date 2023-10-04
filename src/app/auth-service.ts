@@ -31,6 +31,9 @@ export function isLoggedIn() {
     ? false
     : moment().isBefore(getRefreshTokenExpiration());
 }
+export function hasToken() {
+  return localStorage.getItem('accessToken') == null ? false : true;
+}
 function hasAccessTokenExpired() {
   return moment().isAfter(getAccessTokenExpiration());
 }
@@ -60,6 +63,12 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http.post(WebAppConstants.login, { username, password }).pipe(
+      tap((response) => this.setSession(response)),
+      shareReplay()
+    );
+  }
+  baseWebsiteLogin(username: string, password: string) {
+    return this.http.post(WebAppConstants.baseWebsiteLogin, { username, password }).pipe(
       tap((response) => this.setSession(response)),
       shareReplay()
     );
@@ -144,7 +153,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 tap((response: any) =>
                   this.authService.setRefreshedSession(response)
                 )
-              )
+              );
           })
         );
       }

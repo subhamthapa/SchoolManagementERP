@@ -1,6 +1,6 @@
 <app-loading [loading]="loading"></app-loading>
 <div class="container">
-  <mat-card class="card-panel shadow p-3 mb-5 bg-white rounded">
+  <mat-card appearance="outlined" class="card-panel shadow p-3 mb-5 bg-white rounded">
     <mat-card-header>
       <mat-icon style="margin-right: 20px">settings</mat-icon>
       <h6>General Configuration</h6>
@@ -12,7 +12,7 @@
       <hr />
       <div class="row" id="general-attributes">
         <div class="col-sm-4">
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Website Name</mat-label>
             <input
               matInput
@@ -45,7 +45,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm-4">
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Website Theme</mat-label>
             <mat-select
               [(ngModel)]="deferredData.website_theme"
@@ -82,7 +82,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm-4">
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Navbar Theme</mat-label>
             <mat-select
               [(ngModel)]="deferredData.navbar_theme"
@@ -128,7 +128,7 @@
               *ngFor="let socialMedia of grid.defferedColumns[0]; let i = index"
               class="social-media-control"
             >
-              <mat-form-field style="width: 100%">
+              <mat-form-field style="width: 100%" appearance="outline">
                 <mat-label>{{ socialMedia.name }}</mat-label>
                 <input
                   matInput
@@ -182,7 +182,7 @@
               *ngFor="let socialMedia of grid.defferedColumns[1]; let i = index"
               class="social-media-control"
             >
-              <mat-form-field style="width: 100%">
+              <mat-form-field style="width: 100%" appearance="outline">
                 <mat-label>{{ socialMedia.name }}</mat-label>
                 <input
                   matInput
@@ -236,7 +236,7 @@
         Add a social media page
         <div class="row">
           <div class="col-sm-6">
-            <mat-form-field style="margin-top: 20px; width: 100%">
+            <mat-form-field style="margin-top: 20px; width: 100%" appearance="outline">
               <mat-label>Select Social Media</mat-label>
               <mat-select [(ngModel)]="selectedSocialMedia">
                 <mat-option
@@ -249,7 +249,7 @@
             </mat-form-field>
           </div>
           <div class="col-sm-6">
-            <mat-form-field style="margin-top: 20px; width: 100%">
+            <mat-form-field style="margin-top: 20px; width: 100%" appearance="outline">
               <mat-label>Url</mat-label>
               <input
                 matInput
@@ -322,7 +322,7 @@
       <hr />
       <div class="row">
         <div class="col-sm-4">
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>School Name</mat-label>
             <input
               matInput
@@ -354,7 +354,7 @@
             </button>
           </mat-form-field>
           <br />
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Pin Code</mat-label>
             <input
               matInput
@@ -385,7 +385,7 @@
             </button>
           </mat-form-field>
           <br />
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Alternate Phone No 2 </mat-label>
             <input
               matInput
@@ -417,7 +417,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm-4">
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Address Line 1</mat-label>
             <input
               matInput
@@ -449,7 +449,7 @@
             </button>
           </mat-form-field>
           <br />
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Phone No</mat-label>
             <input
               matInput
@@ -480,7 +480,7 @@
             </button>
           </mat-form-field>
           <br />
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Email</mat-label>
             <input
               matInput
@@ -510,7 +510,7 @@
           </mat-form-field>
         </div>
         <div class="col-sm-4">
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Address Line 2</mat-label>
             <input
               matInput
@@ -542,7 +542,7 @@
             </button>
           </mat-form-field>
           <br />
-          <mat-form-field style="width: 100%">
+          <mat-form-field style="width: 100%" appearance="outline">
             <mat-label>Alternate Phone No </mat-label>
             <input
               matInput

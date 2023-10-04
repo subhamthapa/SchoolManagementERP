@@ -23,7 +23,7 @@
 }
 .codeFontMd
 {
-  font-size: 12px;
+  font-size: 10px;
   color: blueviolet;
   font-family: 'Roboto Mono', monospace;
 }
@@ -33,4 +33,13 @@
   font-size: medium;
   color: blueviolet;
   font-family: 'Roboto Mono', monospace;
+}
+.nav-buttons
+{
+  background-color: white;
+  color: black;
+}
+input
+{
+  border: transparent;
 }

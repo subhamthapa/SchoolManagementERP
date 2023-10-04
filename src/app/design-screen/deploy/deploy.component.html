@@ -1,0 +1,60 @@
+<h2>Deploy your view to web</h2>
+<hr>
+<form>
+  <div class="form-group">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Webpage Name</mat-label>
+        <input
+        matInput
+        type="text"
+        [(ngModel)] = "webpageName"
+        name="View Name"
+        required
+      />
+      <button
+        *ngIf="webpageName"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="webpageName = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    </div>
+    <div class="form-group">
+      <section
+        style="width: 100% !important;"
+      >
+        <mat-radio-group [(ngModel)]="permissions" name="permission">
+          <mat-radio-button value="open">
+            Public
+          </mat-radio-button>
+          <mat-radio-button value="restrict_to_logged_in">
+            Logged In
+          </mat-radio-button>
+        </mat-radio-group>
+      </section>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Url</mat-label>
+          <input
+          matInput
+          type="text"
+          [(ngModel)] = "url"
+          name="url"
+        />
+        <button
+          *ngIf="url"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="url = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <button type="button" mat-raised-button color="primary" (click) ="deploy()">Deploy</button>
+</form>

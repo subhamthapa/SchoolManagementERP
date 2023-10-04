@@ -58,6 +58,8 @@ export class Button extends UIComponent {
     super();
     this.element = renderer.createElement('button');
     renderer.addClass(this.element, 'editor-component');
+    //[cdkContextMenuTriggerFor]="context_menu"
+    renderer.setAttribute(this.element, 'cdkContextMenuTriggerFor', 'context_menu')
     renderer.addClass(this.element, 'btn');
     renderer.addClass(this.element, 'btn-primary');
     renderer.setProperty(this.element, 'innerHTML', this.value);

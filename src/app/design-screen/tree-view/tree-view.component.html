@@ -1,0 +1,103 @@
+<div class="container treeParent">
+  <div>
+    <mat-tree
+      [dataSource]="transformer.dataSource"
+      [treeControl]="transformer.treeControl"
+      class=""
+    >
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button disabled></button>
+        <button mat-button (click)="select(node)">
+          {{ node.name
+          }}<small class="element-name" *ngIf="node.object">{{
+            node.object.instance.elementName
+          }}</small>
+        </button>
+        <button
+          mat-mini-fab
+          color="primary"
+          style="margin-left: 20px"
+          *ngIf="node.object.instance.is_container"
+        >
+          <small class="element-button">Root</small>
+        </button>
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-tree-node
+        *matTreeNodeDef="let node; when: transformer.hasChild"
+        matTreeNodePadding
+      >
+        <button
+          mat-icon-button
+          matTreeNodeToggle
+          [attr.aria-label]="'Toggle ' + node.name"
+        >
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{
+              transformer.treeControl.isExpanded(node)
+                ? "expand_more"
+                : "chevron_right"
+            }}
+          </mat-icon>
+        </button>
+        <button mat-button (click)="select(node)">
+          {{ node.name }}
+        </button>
+        <button
+          mat-mini-fab
+          color="primary"
+          style="margin-left: 20px"
+          #tooltip="matTooltip"
+          matTooltip="Set as root"
+          *ngIf="node.object && node.object.instance.is_container && node.object.instance != data['owner'].rootComponent"
+          (click)="setAsRoot(node.object)"
+        >
+          <small class="element-button">
+            <span
+              class="material-symbols-outlined"
+              style="vertical-align: middle"
+            >
+              pinch
+            </span>
+          </small>
+        </button>
+        <div *ngIf="node.object && node.object.instance.is_container && node.object.instance == data['owner'].rootComponent"
+          class="root-indicator"
+        >
+          <span class="code-font">
+            <mat-icon class="icon">check</mat-icon>
+            Root
+          </span>
+        </div>
+        <button
+          mat-mini-fab
+          #tooltip="matTooltip"
+          matTooltip="Set as root"
+          color="primary"
+          style="margin-left: 20px"
+          *ngIf="!node.object && data['owner'].rootComponent.constructor.name != 'CreateViewComponent'"
+          (click)="setBodyAsRoot()"
+        >
+          <small class="element-button">
+            <span
+              class="material-symbols-outlined"
+              style="vertical-align: middle"
+            >
+              pinch
+            </span>
+          </small>
+        </button>
+        <div *ngIf="!node.object && data['owner'].rootComponent.constructor.name == 'CreateViewComponent'"
+          class="root-indicator"
+        >
+          <span class="code-font">
+            <mat-icon class="icon">check</mat-icon>
+            Root
+          </span>
+        </div>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+</div>

@@ -19,8 +19,7 @@ export class Constants {
   public static defaultSelectQuery = {
     query: 'selectColumn',
     dataModel: '',
-    columns:[],
-    count: [],
+    columns:[]
   };
   public static defaulInsertQuery = {
     query: 'insertInto',

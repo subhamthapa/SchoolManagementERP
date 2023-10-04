@@ -1,0 +1,19 @@
+<div>
+  <h3>Save JSON webpage</h3>
+  <mat-form-field appearance="outline" style="width: 100%">
+    <mat-label>File Name</mat-label>
+    <input matInput placeholder="File Path" [(ngModel)]="path" [required]="true"/>
+  </mat-form-field>
+  <br>
+  <button
+    mat-mini-fab
+    color="primary"
+    #tooltip="matTooltip"
+    matTooltip="Save"
+    class="nav-button"
+    style="height: 40px; width: 40px"
+    (click)="save()"
+  >
+    <mat-icon style="font-size: 20px; vertical-align: center">save</mat-icon>
+  </button>
+</div>

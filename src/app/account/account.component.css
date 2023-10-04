@@ -1,0 +1,22 @@
+.wrapper
+{
+  min-height: 100%;
+  padding-top: 10px;
+}
+.grey
+{
+  color: lightslategray;
+}
+@media all and (min-width: 375px) and (max-width: 992px) {
+  .wrapper
+  {
+    padding-top: 73px !important;
+  }
+}
+@media all and (max-width: 375px) {
+  .wrapper
+  {
+    margin-top: 10px !important;
+    padding-bottom: 50px;
+  }
+}

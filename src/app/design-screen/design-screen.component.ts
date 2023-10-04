@@ -11,5 +11,8 @@ export class DesignScreenComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  disableRightClick()
+  {
+    return false
+  }
 }

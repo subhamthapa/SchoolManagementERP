@@ -1,0 +1,117 @@
+<div class="container-fluid capsule" #container>
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="connection-req">
+        <mat-card>
+          <mat-card-header>
+            <h3>Connection Requests</h3>
+          </mat-card-header>
+          <hr style="margin-top: 0px" />
+          <mat-selection-list>
+            <mat-list-item *ngFor="let request of connectionRequests">
+              <img
+                src="{{ apiHost + request.profile_pic }}"
+                class="rounded-circle img-fluid"
+                width="40"
+              /> &nbsp;
+              {{ request.request_from }}
+            </mat-list-item>
+          </mat-selection-list>
+        </mat-card>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div>
+        <mat-card #searchPannel>
+          <mat-card-content>
+            <mat-form-field style="width: 100%" appearance="outline">
+              <input
+                type="text"
+                matInput
+                [(ngModel)]="searchKey"
+                placeholder="Search"
+                (ngModelChange)="search()"
+              />
+              <button matSuffix mat-icon-button>
+                <mat-icon>search</mat-icon>
+              </button>
+            </mat-form-field>
+            <div>
+              <mat-selection-list>
+                <mat-list-item
+                  *ngFor="let user of users"
+                  style="height: 70px"
+                  routerLink="account"
+                  [queryParams]="{ username: user.username }"
+                >
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h3>
+                        <img
+                          src="{{ apiHost + user.image_thumbnail }}"
+                          class="rounded-circle img-fluid"
+                          height="50"
+                          width="50"
+                          style="
+                            margin-right: 30px;
+                            margin-top: 20px;
+                            vertical-align: middle;
+                          "
+                          *ngIf="user.image_thumbnail"
+                        />
+                        <span
+                          class="material-symbols-outlined"
+                          *ngIf="!user.image_thumbnail"
+                          style="
+                            font-size: 50px;
+                            vertical-align: middle;
+                            margin-right: 30px;
+                          "
+                        >
+                          face
+                        </span>
+                        <strong style="margin-top: 40px">{{
+                          user.username
+                        }}</strong>
+                      </h3>
+                    </div>
+                    <div class="col-sm-8" style="padding-top: 25px">
+                      <small style="padding-left: 200px"
+                        >{{ user.first_name }} {{ user.last_name }}</small
+                      >
+                    </div>
+                  </div>
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+              </mat-selection-list>
+              <div
+                class="text-center"
+                *ngIf="users.length != 0"
+                style="margin-top: 50px"
+              >
+                <button mat-button>
+                  <mat-icon> expand_more </mat-icon>
+                </button>
+                <button
+                  mat-fab
+                  color="transparent"
+                  style="float: right"
+                  *ngIf="users.length != 0"
+                  (click)="users.length = []; searchKey = ''"
+                >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div class="connections"></div>
+    </div>
+  </div>
+</div>

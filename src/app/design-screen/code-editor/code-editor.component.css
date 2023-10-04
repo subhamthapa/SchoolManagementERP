@@ -1,0 +1,35 @@
+#codeEditor
+{
+  position: absolute;
+  left:0px;
+  padding:0px;
+  z-index: 2000;
+  bottom: 10px;
+  width: 80%;
+  height:70%;
+  margin:0px;
+  left:100px;
+}
+#textEdit
+{
+  width:100%;
+  padding:20px;
+  margin:-10px;
+  top:0px;
+  opacity: 0.8;
+  color:white;
+  z-index: 2000;
+  height: 100%;
+  background-color:black;
+  font-family: 'Roboto Mono', monospace;
+}
+#top
+{
+  background-color:black;
+  padding:0px;
+  width: 100%;
+  margin-left: -10px;
+  color:white;
+  opacity: 0.8;
+  padding: 8px;
+}
